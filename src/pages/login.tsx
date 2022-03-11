@@ -137,7 +137,9 @@ const ConfirmWords = (_: ConfirmWordsProps) => {
 			number: index + 1,
 		}))
 
-		return shuffle(mappedWords).slice(0, 4)
+		return shuffle(mappedWords)
+			.slice(0, 4)
+			.sort((a, b) => a.number - b.number)
 	}, [mnemonic])
 
 	const [valid, setValid] = useState<boolean[]>([])
