@@ -1,3 +1,220 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css?family=Montserrat:200,300,700");
+
+/* DO THIS BETTER */
+a {
+    text-decoration: none !important;
+  }
+  
+  :root {
+    /* Global color */
+    background-color: #f2f2f2;
+  
+    /* users can not select unless we explicity allow */
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+  
+    /*----------COLORS----------*/
+    /* Primary tone */
+    --sc-yellow: #efd96f;
+    --sc-blue: #24b1ff;
+    /* Secondary tone */
+    --sc-green: #7ad69c;
+    --sc-red: #f55858;
+    --sc-grey4: #333333;
+    /* Additional colors */
+    --sc-white: #fafafa;
+    --sc-grey1: #f2f2f2;
+    --sc-grey1b: #e6e6e6;
+    --sc-grey2: #bfbfbf;
+    --sc-grey3: #666666;
+    --sc-grey3b: #acacac;
+    --sc-green2: #23b460;
+    --sc-red2: #d0021b;
+  }
+  
+  /*----------TYPOGRAPHY----------*/
+  .mainTitle1 {
+    font-weight: 800;
+    font-family: Montserrat, sans-serif;
+    font-size: 35px;
+    letter-spacing: 0;
+    line-height: 36px;
+  }
+  .mainTitle2 {
+    font-family: Montserrat, sans-serif;
+    font-weight: 800;
+    font-size: 28px;
+    letter-spacing: 0;
+    line-height: 36px;
+  }
+  .mainTitle3 {
+    font-family: Montserrat, sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    letter-spacing: 0px;
+    line-height: 32px;
+  }
+  .mainTitle4 {
+    font-family: Montserrat, sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: 0;
+    line-height: 27px;
+  }
+  .bodyDefault {
+    font-family: Montserrat, sans-serif;
+    font-weight: 200;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 19px;
+  }
+  .bodyBold {
+    font-family: Montserrat, sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 19px;
+  }
+  .bodyDetail {
+    font-family: Montserrat, sans-serif;
+    font-weight: 200;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: 24px;
+  }
+  .bodyButton {
+    font-family: Montserrat, sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0;
+    line-height: 22px;
+  }
+  .smallLight {
+    font-family: Montserrat, sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 15px;
+  }
+  
+  .smallBold {
+    font-family: Montserrat, sans-serif;
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 15px;
+  }
+  .smallestLight {
+    font-family: Montserrat, sans-serif;
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: 0;
+    line-height: 13px;
+  }
+  .smallestBold {
+    font-family: Montserrat, sans-serif;
+    font-weight: 800;
+    font-size: 10px;
+    letter-spacing: 0;
+    line-height: 13px;
+  }
+
+  .blueLink {
+    composes: smallBold;
+    cursor: pointer;
+    color: --sc-blue;
+    border-bottom: 2px dotted blue;
+  } 
+  
+  .greyLink {
+    composes: smallLight from './styles.module.css';
+    cursor: pointer;
+    color: var(--sc-grey4);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--sc-grey3b);
+  }
+  
+  .baseShadow {
+    box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.5);
+    -o-box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.5);
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+      monospace;
+  }
+  
+  *:focus {
+    outline: none !important;
+  }
+  
+  .backgroundImg {
+    background-image: url("./images/bg-header3.png");
+  }
+  
+  .swarm-city {
+    composes: backgroundImg;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: auto;
+  }
+
+  .yellow {
+    color: var(--sc-yellow);
+  }
+  
+  .blue {
+    color: var(--sc-blue);
+  }
+
+  .button {
+    composes: bodyButton;
+    composes: baseShadow;
+    width: 75vw;
+    min-width: 200px;
+    max-width: 300px;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 30px 42px;
+    border-radius: 2px;
+    cursor: pointer;
+    max-height: 82px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin-top: 20px;
+  }
+  
+  .buttontext {
+    color: white;
+  }
+  
+  .buttongray {
+    width: 75vw;
+    min-width: 200px;
+    max-width: 300px;
+    composes: bodyButton from "./styles.module.css";
+    composes: baseShadow from "./styles.module.css";
+    text-align: center;
+    box-sizing: border-box;
+    padding: 30px 42px;
+    border-radius: 2px;
+    cursor: pointer;
+    max-height: 82px;
+    background-color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 10px;
+  }
+  
+  .buttontextblue {
+    color: var(--sc-blue);
+  }
