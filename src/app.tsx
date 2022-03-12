@@ -1,4 +1,4 @@
-import { Router } from '@reach/router'
+import { Router, Redirect } from '@reach/router'
 import { Provider as WagmiProvider } from 'wagmi'
 import {
 	InfuraProvider,
@@ -27,6 +27,7 @@ export function App() {
 		<>
 			<WagmiProvider provider={provider} webSocketProvider={webSocketProvider}>
 				<Router>
+					<Redirect from="/" to="/login" noThrow />
 					<LoginPage path="/login/*" />
 				</Router>
 			</WagmiProvider>
