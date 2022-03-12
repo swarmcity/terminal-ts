@@ -254,7 +254,7 @@ const ChoosePassword = (_: ChoosePasswordProps) => {
 	const canNext = showPrompt || passwordValid
 
 	const navigate = useNavigate()
-	const onNext = () => {
+	const onNext = async () => {
 		if (showPrompt) {
 			setShowPrompt(false)
 			return
@@ -264,13 +264,11 @@ const ChoosePassword = (_: ChoosePasswordProps) => {
 			return
 		}
 
-		;(async () => {
-			setLoading(true)
-			const wallet = Wallet.fromMnemonic(mnemonic.phrase)
-			setEncryptedWallet(await wallet.encrypt(passwords[0]))
-			navigate('/login/done')
-			setLoading(false)
-		})()
+		setLoading(true)
+		const wallet = Wallet.fromMnemonic(mnemonic.phrase)
+		setEncryptedWallet(await wallet.encrypt(passwords[0]))
+		navigate('/login/done')
+		setLoading(false)
 	}
 
 	return (
