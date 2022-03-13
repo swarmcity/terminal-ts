@@ -231,7 +231,10 @@ type ChoosePasswordProps = RouteComponentProps
 
 // TODO: Encrypt and save mnemonic + profile in localstorage
 const ChoosePassword = (_: ChoosePasswordProps) => {
+	const [mnemonic] = useStore.mnemonic()
+	const [, setEncryptedWallet] = useStore.encryptedWallet()
 	const [showPrompt, setShowPrompt] = useState(true)
+	const [loading, setLoading] = useState(false)
 	const [passwords, setPasswords] = useState<[string, string]>(['', ''])
 	const changePassword = (
 		index: number,
@@ -242,22 +245,30 @@ const ChoosePassword = (_: ChoosePasswordProps) => {
 		setPasswords(copy)
 	}
 
+	if (!mnemonic) {
+		return <div>Error: no mnemonic</div>
+	}
+
 	const passwordsFilledIn = passwords[0].length > 0 && passwords[1].length > 0
 	const passwordValid = passwords[0].length > 0 && passwords[0] === passwords[1]
 	const canNext = showPrompt || passwordValid
 
 	const navigate = useNavigate()
-	const onNext = () => {
+	const onNext = async () => {
 		if (showPrompt) {
 			setShowPrompt(false)
 			return
 		}
 
-		if (!canNext) {
+		if (!canNext || !mnemonic || loading) {
 			return
 		}
 
+		setLoading(true)
+		const wallet = Wallet.fromMnemonic(mnemonic.phrase)
+		setEncryptedWallet(await wallet.encrypt(passwords[0]))
 		navigate('/login/done')
+		setLoading(false)
 	}
 
 	return (
@@ -315,9 +326,9 @@ const ChoosePassword = (_: ChoosePasswordProps) => {
 				</>
 			)}
 			<button
-				class="btn w-min place-self-center"
+				class={cn('btn w-min place-self-center', loading && 'loading')}
 				onClick={onNext}
-				disabled={!canNext}
+				disabled={!canNext || loading}
 			>
 				Next
 			</button>
@@ -329,6 +340,11 @@ type DoneProps = RouteComponentProps
 
 const Done = (_: DoneProps) => {
 	const [profile] = useStore.profile()
+
+	if (!profile) {
+		return <div>Error: no profile</div>
+	}
+
 	const { username } = profile
 
 	return (
