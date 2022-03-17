@@ -41,3 +41,4 @@ jobs:
         uses: filoozom/swarm-actions/pr-preview@v0
         with:
           dir: ./dist
+          error-document: index.html
