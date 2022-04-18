@@ -5,8 +5,8 @@
 		"dev": "vite",
 		"build": "tsc && vite build",
 		"preview": "vite preview",
-		"test": "npm run test:unit && npm run test:integration",
-		"test:integration": "jest --verbose --selectProjects=dom:integration --config=jest.config.ts",
+		"test": "npm run test:unit && npm run test:e2e",
+		"test:e2e": "jest --verbose --selectProjects=dom:e2e --config=jest.config.ts",
 		"test:unit": "jest --verbose --selectProjects=node:unit --config=jest.config.ts"
 	},
 	"dependencies": {

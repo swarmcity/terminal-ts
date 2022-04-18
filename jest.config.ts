@@ -29,8 +29,8 @@ export default async (): Promise<Config.InitialOptions> => {
         testRegex: 'test/unit/.*\\.spec\\.ts',
       },
       {
-        displayName: 'dom:integration',
-        testRegex: 'test/integration/.*\\.spec\\.ts',
+        displayName: 'dom:e2e',
+        testRegex: 'test/e2e/.*\\.spec\\.ts',
         transform: {
           "^.+\\.tsx?$": "babel-jest"
         },
