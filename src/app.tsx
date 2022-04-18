@@ -7,7 +7,8 @@ import {
 import type { BaseProvider, WebSocketProvider } from '@ethersproject/providers'
 
 // Pages
-import { LoginPage } from './pages/login'
+import { Login } from './pages/login'
+import { CreateAccount } from './pages/create-account/create-account'
 
 // Wagmi config
 // TODO: Move this to env variable or config file
@@ -28,7 +29,8 @@ export function App() {
 			<WagmiProvider provider={provider} webSocketProvider={webSocketProvider}>
 				<Router>
 					<Redirect from="/" to="/login" noThrow />
-					<LoginPage path="/login/*" />
+					<Login path="/login" />
+					<CreateAccount path="/create-account" />
 				</Router>
 			</WagmiProvider>
 		</>

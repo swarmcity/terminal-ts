@@ -1,15 +1,10 @@
 import createStore from 'teaful'
-import { Mnemonic } from 'ethers/lib/utils'
 
-type Profile = {
-	username: string
-}
+// Types
+import type { Profile } from './types/profile'
 
 type Store = {
-	address: string | undefined
-	mnemonic: Mnemonic | undefined
 	profile: Profile | undefined
-	encryptedWallet: string | undefined
 }
 
 function setLocalStore(key: string, value?: string) {
@@ -37,14 +32,9 @@ function readLocalStore<T>(key: string): T | undefined {
 
 export const { useStore, getStore, withStore } = createStore<Store>(
 	{
-		address: readLocalStore('address'),
-		mnemonic: undefined,
 		profile: readLocalStore('profile'),
-		encryptedWallet: readLocalStore('encryptedWallet'),
 	},
 	({ store, prevStore }) => {
-		updateLocalStore(store, prevStore, 'encryptedWallet')
 		updateLocalStore(store, prevStore, 'profile')
-		updateLocalStore(store, prevStore, 'address')
 	}
 )
