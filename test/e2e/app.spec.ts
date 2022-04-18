@@ -24,7 +24,10 @@ describe("app.tsx", () => {
     page = await browser.newPage();
   });
 
-  afterAll(() => browser.close());
+  afterAll(async () => {
+    await browser.close()
+    await new Promise((resolve) => server.httpServer.close(resolve))
+  });
 
   test("should navigate to the create-account page", async () => {
     await page.goto(PAGES.login);
