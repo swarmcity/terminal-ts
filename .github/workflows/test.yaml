@@ -34,8 +34,5 @@ jobs:
         if: steps.cache-npm.outputs.cache-hit != 'true'
         run: npm ci
 
-      - name: Run Unit Tests
-        run: npm run test:unit
-
-      - name: Run End-to-End Tests
-        run: npm run test:e2e
+      - name: Run Unit and End-to-End Tests
+        run: npm run test
