@@ -31,7 +31,7 @@ describe("app.tsx", () => {
 
   test("should navigate to the create-account page", async () => {
     await page.goto(PAGES.login);
-    const createAccountBtn = await page.waitForSelector("#create-account-btn");
+    const createAccountBtn = await page.waitForSelector('a[href="/create-account"]');
     await createAccountBtn.click()
 
     await sleep(100) // just to be sure, sometimes it failed as the click handler is async

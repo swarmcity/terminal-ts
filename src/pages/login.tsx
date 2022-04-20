@@ -11,7 +11,7 @@ export const Login = (_: LoginProps) => (
 				account, it is stored locally on your device.
 			</p>
 			<div class="flex flex-col">
-				<Link to="/create-account" className="btn mb-2" id="create-account-btn">
+				<Link to="/create-account" className="btn mb-2">
 					Create account
 				</Link>
 				<button class="btn">Restore account</button>
