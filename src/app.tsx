@@ -9,6 +9,7 @@ import {
 
 // Pages
 import { Login } from './pages/login'
+import { Home } from './pages/home'
 import { CreateAccount } from './pages/create-account/create-account'
 
 // Wagmi config
@@ -29,9 +30,9 @@ export function App() {
 		<>
 			<WagmiProvider provider={provider} webSocketProvider={webSocketProvider}>
 				<Router>
-					<Redirect from="/" to="/login" noThrow />
 					<Login path="/login" />
 					<CreateAccount path="/create-account" />
+					<Home path="/" />
 				</Router>
 			</WagmiProvider>
 		</>
