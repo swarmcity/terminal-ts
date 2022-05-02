@@ -4,8 +4,6 @@ import type { PreviewServer } from 'vite'
 import puppeteer from 'puppeteer'
 import type { Browser, Page } from 'puppeteer'
 
-import { getProperty } from '../utils'
-
 const port = 3142 // Unlike in life, where there is no such thing as free PI, servers usually don't run on it
 const BASE_URL = `http://localhost:${port}`
 const PAGES = {
