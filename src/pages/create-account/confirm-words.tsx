@@ -67,6 +67,7 @@ export const ConfirmWords = ({ wallet, onNext, onBack }: ConfirmWordsProps) => {
 			</a>
 			{confirmWords.map(({ word, number }, index) => (
 				<ConfirmWordInput
+					key={number}
 					word={word}
 					number={number}
 					onChange={(correct) => setCorrect(index, correct)}

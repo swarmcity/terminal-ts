@@ -14,13 +14,13 @@ export const GenerateMnemonic = ({ wallet, onNext }: GenerateMnemonicProps) => {
 			<h1 class="text-3xl mb-8">Write down these 12 words.</h1>
 			<div class="flex place-content-stretch mb-8">
 				{lists.map((words, index) => (
-					<div class="grow">
+					<div key={index} class="grow">
 						<ol
 							class="list-decimal w-min mx-auto text-left"
 							start={1 + 6 * index}
 						>
 							{words.map((word) => (
-								<li>{word}</li>
+								<li key={word}>{word}</li>
 							))}
 						</ol>
 					</div>

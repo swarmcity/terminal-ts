@@ -3,8 +3,9 @@ import { Provider as WagmiProvider } from 'wagmi'
 import {
 	InfuraProvider,
 	InfuraWebSocketProvider,
+	BaseProvider,
+	WebSocketProvider,
 } from '@ethersproject/providers'
-import type { BaseProvider, WebSocketProvider } from '@ethersproject/providers'
 
 // Pages
 import { Login } from './pages/login'
