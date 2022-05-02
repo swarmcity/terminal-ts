@@ -4,8 +4,6 @@ import { Wallet } from 'ethers'
 
 // Components
 import { ChoosePassword } from './choose-password'
-import { ConfirmWords } from './confirm-words'
-import { GenerateMnemonic } from './generate-mnemonic'
 import { Done } from './done'
 import { SetupProfile } from './setup-profile'
 import { useStore } from '../../store'
@@ -27,8 +25,6 @@ export const CreateAccount = (_: CreateAccountProps) => {
 	const wallet = useMemo(() => Wallet.createRandom(), [])
 
 	// Local state
-	const [showWallet, setShowWallet] = useState<boolean>(true)
-	const [walletConfirmed, setWalletConfirmed] = useState(false)
 	const [username, setUsername] = useState<string>('')
 
 	// Global state
@@ -43,15 +39,7 @@ export const CreateAccount = (_: CreateAccountProps) => {
 
 	return (
 		<Wrapper>
-			{showWallet ? (
-				<GenerateMnemonic wallet={wallet} onNext={() => setShowWallet(false)} />
-			) : !walletConfirmed ? (
-				<ConfirmWords
-					wallet={wallet}
-					onNext={() => setWalletConfirmed(true)}
-					onBack={() => setShowWallet(true)}
-				/>
-			) : !username ? (
+			{!username ? (
 				<SetupProfile onNext={setUsername} />
 			) : !profile ? (
 				<ChoosePassword wallet={wallet} onNext={saveProfile} />

@@ -45,47 +45,12 @@ describe('app.tsx', () => {
 		expect(url).toEqual(PAGES.createAccount)
 	})
 
-	test('should display mnemonic in the create-account page', async () => {
-		await page.goto(PAGES.createAccount)
-		const wordsElement = await page.$$('li')
-		const words: string[] = []
-		for (let i = 0; i < wordsElement.length; i++)
-			words.push(await wordsElement[i].evaluate((el) => el.textContent))
-
-		expect(words.length).toBe(12)
-	})
-
 	test('should go through the create-account flow', async () => {
 		await page.goto(PAGES.createAccount)
-		const wordsElement = await page.$$('li')
-		const words: string[] = []
-		for (let i = 0; i < wordsElement.length; i++)
-			words.push(await wordsElement[i].evaluate((el) => el.textContent))
-
-		expect(words.length).toBe(12)
-
-		let nextButton = await page.waitForSelector('button')
-		await nextButton.click()
-
-		// Validating the mnemonic words
-		let headerElement = await page.waitForSelector('h1')
-		let headerText = await headerElement.evaluate((el) => el.textContent)
-		expect(headerText).toBe('Fill in the correct words.')
-		const inputElements = await page.$$('input')
-		expect(inputElements.length).toBe(4)
-		for (let i = 0; i < inputElements.length; i++) {
-			const wordText = await getProperty(inputElements[i], 'placeholder')
-			const wordIndex = Number.parseInt(wordText.replace('Word ', ''), 10)
-			await inputElements[i].focus()
-			await page.keyboard.type(words[wordIndex - 1]) // input the words
-		}
-
-		nextButton = await page.waitForSelector('button')
-		await nextButton.click()
 
 		// Inputing in the username
-		headerElement = await page.waitForSelector('h1')
-		headerText = await headerElement.evaluate((el) => el.textContent)
+		let headerElement = await page.waitForSelector('h1')
+		let headerText = await headerElement.evaluate((el) => el.textContent)
 		expect(headerText).toBe('Choose a username and an avatar.')
 
 		const usernameElement = await page.waitForSelector('input')
@@ -93,7 +58,7 @@ describe('app.tsx', () => {
 		const username = 'testusername'
 		await page.keyboard.type(username)
 
-		nextButton = await page.waitForSelector('button')
+		let nextButton = await page.waitForSelector('button')
 		await nextButton.click()
 
 		// Choose your password page with warning
