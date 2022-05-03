@@ -1,7 +1,11 @@
 // Store
 import { useStore } from '../../store'
 
-export const Done = () => {
+type CreatedProps = {
+	onNext: () => void
+}
+
+export const Created = ({ onNext }: CreatedProps) => {
 	const [profile] = useStore.profile()
 
 	if (!profile) {
@@ -13,9 +17,12 @@ export const Done = () => {
 	return (
 		<>
 			<h1 class="text-3xl mb-4">Great!</h1>
-			<p class="mb-16">You now have a Swarm City account.</p>
+			<p>You now have a Swarm City account.</p>
+			<p class="mb-16">Let's create a backup!</p>
 			<p class="mb-16">{username}</p>
-			<button class="btn">Enter Swarm.City</button>
+			<button class="btn" onClick={onNext}>
+				Backup my account
+			</button>
 		</>
 	)
 }

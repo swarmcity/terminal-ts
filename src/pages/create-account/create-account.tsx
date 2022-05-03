@@ -1,15 +1,14 @@
 import { ComponentChildren } from 'preact'
 import { useState, useMemo } from 'preact/hooks'
 import { Wallet } from 'ethers'
+import { RouteComponentProps } from '@reach/router'
 
 // Components
 import { ChoosePassword } from './choose-password'
-import { ConfirmWords } from './confirm-words'
-import { GenerateMnemonic } from './generate-mnemonic'
-import { Done } from './done'
+import { Created } from './created'
 import { SetupProfile } from './setup-profile'
 import { useStore } from '../../store'
-import { RouteComponentProps } from '@reach/router'
+import { Backup } from './backup'
 
 type WrapperProps = {
 	children: ComponentChildren
@@ -27,9 +26,8 @@ export const CreateAccount = (_: CreateAccountProps) => {
 	const wallet = useMemo(() => Wallet.createRandom(), [])
 
 	// Local state
-	const [showWallet, setShowWallet] = useState<boolean>(true)
-	const [walletConfirmed, setWalletConfirmed] = useState(false)
 	const [username, setUsername] = useState<string>('')
+	const [showBackup, setShowBackup] = useState(false)
 
 	// Global state
 	const [profile, setProfile] = useStore.profile()
@@ -43,20 +41,14 @@ export const CreateAccount = (_: CreateAccountProps) => {
 
 	return (
 		<Wrapper>
-			{showWallet ? (
-				<GenerateMnemonic wallet={wallet} onNext={() => setShowWallet(false)} />
-			) : !walletConfirmed ? (
-				<ConfirmWords
-					wallet={wallet}
-					onNext={() => setWalletConfirmed(true)}
-					onBack={() => setShowWallet(true)}
-				/>
-			) : !username ? (
+			{!username ? (
 				<SetupProfile onNext={setUsername} />
 			) : !profile ? (
 				<ChoosePassword wallet={wallet} onNext={saveProfile} />
+			) : !showBackup ? (
+				<Created onNext={() => setShowBackup(true)} />
 			) : (
-				<Done />
+				<Backup />
 			)}
 		</Wrapper>
 	)
