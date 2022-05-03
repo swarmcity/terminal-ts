@@ -1,13 +1,14 @@
 import { ComponentChildren } from 'preact'
 import { useState, useMemo } from 'preact/hooks'
 import { Wallet } from 'ethers'
+import { RouteComponentProps } from '@reach/router'
 
 // Components
 import { ChoosePassword } from './choose-password'
-import { Done } from './done'
+import { Created } from './created'
 import { SetupProfile } from './setup-profile'
 import { useStore } from '../../store'
-import { RouteComponentProps } from '@reach/router'
+import { Backup } from './backup'
 
 type WrapperProps = {
 	children: ComponentChildren
@@ -26,6 +27,7 @@ export const CreateAccount = (_: CreateAccountProps) => {
 
 	// Local state
 	const [username, setUsername] = useState<string>('')
+	const [showBackup, setShowBackup] = useState(false)
 
 	// Global state
 	const [profile, setProfile] = useStore.profile()
@@ -43,8 +45,10 @@ export const CreateAccount = (_: CreateAccountProps) => {
 				<SetupProfile onNext={setUsername} />
 			) : !profile ? (
 				<ChoosePassword wallet={wallet} onNext={saveProfile} />
+			) : !showBackup ? (
+				<Created onNext={() => setShowBackup(true)} />
 			) : (
-				<Done />
+				<Backup />
 			)}
 		</Wrapper>
 	)
