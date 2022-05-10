@@ -4,20 +4,22 @@ import { useRef, useState } from 'preact/hooks'
 import { Cropper, CropperRef } from '../../components/cropper'
 
 // Lib
-import { readFile } from '../../lib/canvas'
+import { blobToDataURL } from '../../lib/canvas'
 
 // Assets
 import DefaultAvatar from '../../../public/assets/avatar.png'
 
 type SetupProfileProps = {
-	onNext: (username: string) => void
+	onNext: (username: string, avatar?: Blob) => void
 }
 
 export const SetupProfile = ({ onNext }: SetupProfileProps) => {
 	const cropperRef = useRef<CropperRef>(null)
 	const [cropper, setCropper] = useState(false)
 	const [avatar, setAvatar] = useState(DefaultAvatar)
+	const [blob, setBlob] = useState<Blob>()
 	const [username, setUsername] = useState<string>()
+
 	const onChange = ({
 		currentTarget,
 	}: JSX.TargetedEvent<HTMLInputElement, Event>) => {
@@ -30,7 +32,10 @@ export const SetupProfile = ({ onNext }: SetupProfileProps) => {
 		}
 
 		try {
-			setAvatar(await cropperRef.current?.getImage())
+			const blob = await cropperRef.current?.getImage()
+
+			setBlob(blob)
+			setAvatar(URL.createObjectURL(blob))
 			setCropper(false)
 		} catch (err) {
 			console.error(err)
@@ -42,7 +47,7 @@ export const SetupProfile = ({ onNext }: SetupProfileProps) => {
 			return
 		}
 
-		onNext(username)
+		onNext(username, blob)
 	}
 
 	// TODO: Type the file change event
@@ -54,7 +59,7 @@ export const SetupProfile = ({ onNext }: SetupProfileProps) => {
 
 		if (event.target.files && event.target.files.length > 0) {
 			const file = event.target.files[0]
-			setAvatar(await readFile(file))
+			setAvatar(await blobToDataURL(file))
 		}
 	}
 

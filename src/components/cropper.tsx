@@ -14,7 +14,7 @@ type CropperProps = Pick<CropProps, 'image'> & {
 }
 
 export type CropperRef = {
-	getImage: () => Promise<string>
+	getImage: () => Promise<Blob>
 }
 
 const CropperInner = (

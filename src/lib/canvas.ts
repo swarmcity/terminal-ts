@@ -29,7 +29,7 @@ export async function getCroppedImage(
 	pixelCrop: Area,
 	rotation = 0,
 	flip = { horizontal: false, vertical: false }
-): Promise<string> {
+): Promise<Blob> {
 	const image = await createImage(imageSrc)
 	const canvas = document.createElement('canvas')
 	const ctx = canvas.getContext('2d')
@@ -66,18 +66,13 @@ export async function getCroppedImage(
 
 	ctx.putImageData(data, 0, 0)
 
-	return new Promise((resolve) => {
-		canvas.toBlob((file) => {
-			if (!file) {
-				throw new Error()
-			}
-
-			resolve(URL.createObjectURL(file))
-		}, 'image/jpeg')
-	})
+	return canvasToBlob(canvas)
 }
 
-export async function getRotatedImage(imageSrc: string, rotation = 0) {
+export async function getRotatedImage(
+	imageSrc: string,
+	rotation = 0
+): Promise<Blob> {
 	const image = await createImage(imageSrc)
 	const canvas = document.createElement('canvas')
 	const ctx = canvas.getContext('2d')
@@ -100,18 +95,10 @@ export async function getRotatedImage(imageSrc: string, rotation = 0) {
 	ctx.rotate((rotation * Math.PI) / 180)
 	ctx.drawImage(image, -image.width / 2, -image.height / 2)
 
-	return new Promise((resolve) => {
-		canvas.toBlob((file) => {
-			if (!file) {
-				throw new Error()
-			}
-
-			resolve(URL.createObjectURL(file))
-		}, 'image/png')
-	})
+	return canvasToBlob(canvas)
 }
 
-export function readFile(file: File): Promise<string> {
+export function blobToDataURL(blob: Blob): Promise<string> {
 	return new Promise((resolve) => {
 		const reader = new FileReader()
 		reader.addEventListener(
@@ -119,6 +106,14 @@ export function readFile(file: File): Promise<string> {
 			() => resolve(reader.result as string),
 			false
 		)
-		reader.readAsDataURL(file)
+		reader.readAsDataURL(blob)
+	})
+}
+
+export function canvasToBlob(canvas: HTMLCanvasElement): Promise<Blob> {
+	return new Promise((resolve, reject) => {
+		canvas.toBlob((blob) => {
+			blob ? resolve(blob) : reject(new Error('empty blob'))
+		}, 'image/png')
 	})
 }
