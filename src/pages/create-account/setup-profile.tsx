@@ -57,7 +57,7 @@ export const SetupProfile = ({ onNext }: SetupProfileProps) => {
 			return
 		}
 
-		if (event.target.files && event.target.files.length > 0) {
+		if (event.target.files?.length) {
 			const file = event.target.files[0]
 			setAvatar(await blobToDataURL(file))
 		}
