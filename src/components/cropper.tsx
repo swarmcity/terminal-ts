@@ -3,11 +3,13 @@ import { forwardRef } from 'preact/compat'
 import Crop from 'react-easy-crop'
 import cn from 'classnames'
 
+// Lib
+import { getCroppedImage } from '../lib/canvas'
+
 // Types
 import type { Point, Area } from 'react-easy-crop/types'
 import type { CropperProps as CropProps } from 'react-easy-crop'
 import type { Ref } from 'preact'
-import { getCroppedImage } from '../lib/canvas'
 
 type CropperProps = Pick<CropProps, 'image'> & {
 	wrapperClass: string | undefined
