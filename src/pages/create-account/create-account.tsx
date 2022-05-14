@@ -10,6 +10,9 @@ import { SetupProfile } from './setup-profile'
 import { useStore } from '../../store'
 import { Backup } from './backup'
 
+// Lib
+import { blobToDataURL } from '../../lib/canvas'
+
 type WrapperProps = {
 	children: ComponentChildren
 }
@@ -27,22 +30,28 @@ export const CreateAccount = (_: CreateAccountProps) => {
 
 	// Local state
 	const [username, setUsername] = useState<string>('')
+	const [avatar, setAvatar] = useState<Blob>()
 	const [showBackup, setShowBackup] = useState(false)
+	const onProfile = (username: string, avatar?: Blob) => {
+		setUsername(username)
+		setAvatar(avatar)
+	}
 
 	// Global state
 	const [profile, setProfile] = useStore.profile()
-	const saveProfile = (encryptedWallet: string) => {
+	const saveProfile = async (encryptedWallet: string) => {
 		setProfile({
 			username,
 			address: wallet.address,
 			encryptedWallet,
+			avatar: avatar && (await blobToDataURL(avatar)),
 		})
 	}
 
 	return (
 		<Wrapper>
 			{!username ? (
-				<SetupProfile onNext={setUsername} />
+				<SetupProfile onNext={onProfile} />
 			) : !profile ? (
 				<ChoosePassword wallet={wallet} onNext={saveProfile} />
 			) : !showBackup ? (

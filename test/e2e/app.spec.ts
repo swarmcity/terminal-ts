@@ -24,7 +24,8 @@ const walletPath = path.join(downloadPath, '/swarm-city-wallet.json')
 
 const checkWallet = async (password: string) => {
 	const walletContent = await readFile(walletPath, 'utf8')
-	await Wallet.fromEncryptedJson(walletContent, password)
+	const profile = JSON.parse(walletContent)
+	await Wallet.fromEncryptedJson(profile.encryptedWallet, password)
 }
 
 describe('app.tsx', () => {

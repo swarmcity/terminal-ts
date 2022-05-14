@@ -11,7 +11,7 @@ export const Backup = () => {
 	const [profile] = useStore.profile()
 	const blob = useMemo(
 		() =>
-			new Blob([profile?.encryptedWallet ?? ''], {
+			new Blob([JSON.stringify(profile)], {
 				type: 'application/json',
 			}),
 		[profile]
