@@ -1,11 +1,8 @@
 // Store
+import { RouteComponentProps } from '@reach/router'
 import { useStore } from '../../store'
 
-type CreatedProps = {
-	onNext: () => void
-}
-
-export const Created = ({ onNext }: CreatedProps) => {
+export const AccountCreated = (_: RouteComponentProps) => {
 	const [profile] = useStore.profile()
 
 	if (!profile) {
@@ -15,14 +12,35 @@ export const Created = ({ onNext }: CreatedProps) => {
 	const { username } = profile
 
 	return (
-		<>
-			<h1 class="text-3xl mb-4">Great!</h1>
-			<p>You now have a Swarm City account.</p>
-			<p class="mb-16">Let's create a backup!</p>
-			<p class="mb-16">{username}</p>
-			<button class="btn" onClick={onNext}>
-				Backup my account
-			</button>
-		</>
+		<div class="bg-gray-lt account-complete">
+			<div class="close">
+				<a href="user-create-stop.html">
+					<img src="assets/imgs/close.svg" />
+				</a>
+			</div>
+			<div class="container">
+				<main class="flex-space">
+					<header>
+						<h1>Great!</h1>
+						<p>
+							You now have a Swarm City account.
+							<br />
+							Let's create a backup!
+						</p>
+					</header>
+					<div class="content">
+						<figure class="avatar">
+							<img src="assets/imgs/avatar.svg" alt="user avatar" />
+						</figure>
+						<p class="username">{username}</p>
+					</div>
+					<div class="btns">
+						<a class="btn btn-light" href="user-backup-print-download.html">
+							backup my account
+						</a>
+					</div>
+				</main>
+			</div>
+		</div>
 	)
 }

@@ -4,7 +4,7 @@ import createStore from 'teaful'
 import type { Profile } from './types/profile'
 
 type Store = {
-	profile: Profile | undefined
+	profile: Partial<Profile> | undefined
 }
 
 function setLocalStore(key: string, value?: string) {

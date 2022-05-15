@@ -5,7 +5,6 @@ import { RouteComponentProps } from '@reach/router'
 
 // Components
 import { ChoosePassword } from './choose-password'
-import { Created } from './created'
 import { SetupProfile } from './setup-profile'
 import { useStore } from '../../store'
 import { Backup } from './backup'
@@ -31,11 +30,6 @@ export const CreateAccount = (_: CreateAccountProps) => {
 	// Local state
 	const [username, setUsername] = useState<string>('')
 	const [avatar, setAvatar] = useState<Blob>()
-	const [showBackup, setShowBackup] = useState(false)
-	const onProfile = (username: string, avatar?: Blob) => {
-		setUsername(username)
-		setAvatar(avatar)
-	}
 
 	// Global state
 	const [profile, setProfile] = useStore.profile()
@@ -51,11 +45,9 @@ export const CreateAccount = (_: CreateAccountProps) => {
 	return (
 		<Wrapper>
 			{!username ? (
-				<SetupProfile onNext={onProfile} />
+				<SetupProfile />
 			) : !profile ? (
 				<ChoosePassword wallet={wallet} onNext={saveProfile} />
-			) : !showBackup ? (
-				<Created onNext={() => setShowBackup(true)} />
 			) : (
 				<Backup />
 			)}

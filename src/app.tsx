@@ -11,6 +11,9 @@ import {
 import { Login } from './pages/login'
 import { Home } from './pages/home'
 import { CreateAccount } from './pages/create-account/create-account'
+import { AccountCreated } from './pages/create-account/created'
+
+import * as ROUTES from './routes'
 
 // Wagmi config
 // TODO: Move this to env variable or config file
@@ -30,9 +33,10 @@ export function App() {
 		<>
 			<WagmiProvider provider={provider} webSocketProvider={webSocketProvider}>
 				<Router>
-					<Login path="/login" />
-					<CreateAccount path="/create-account" />
-					<Home path="/" />
+					<Login path={ROUTES.LOGIN} />
+					<CreateAccount path={ROUTES.CREATE_ACCOUNT} />
+					<AccountCreated path={ROUTES.ACCOUNT_CREATED} />
+					<Home path={ROUTES.HOME} />
 				</Router>
 			</WagmiProvider>
 		</>
