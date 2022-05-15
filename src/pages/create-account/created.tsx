@@ -1,6 +1,9 @@
 // Store
 import { RouteComponentProps } from '@reach/router'
 import { useStore } from '../../store'
+import { ButtonClose } from '../../components/ButtonClose'
+import avatarDefault from '../../assets/imgs/avatar.svg?url'
+import { ACCOUNT_BACKUP } from '../../routes'
 
 export const AccountCreated = (_: RouteComponentProps) => {
 	const [profile] = useStore.profile()
@@ -9,14 +12,12 @@ export const AccountCreated = (_: RouteComponentProps) => {
 		return <div>Error: no profile</div>
 	}
 
-	const { username } = profile
+	const { username, avatar } = profile
 
 	return (
 		<div class="bg-gray-lt account-complete">
 			<div class="close">
-				<a href="user-create-stop.html">
-					<img src="assets/imgs/close.svg" />
-				</a>
+				<ButtonClose href="user-create-stop.html" />
 			</div>
 			<div class="container">
 				<main class="flex-space">
@@ -30,12 +31,12 @@ export const AccountCreated = (_: RouteComponentProps) => {
 					</header>
 					<div class="content">
 						<figure class="avatar">
-							<img src="assets/imgs/avatar.svg" alt="user avatar" />
+							<img src={avatar || avatarDefault} alt="user avatar" />
 						</figure>
 						<p class="username">{username}</p>
 					</div>
 					<div class="btns">
-						<a class="btn btn-light" href="user-backup-print-download.html">
+						<a class="btn btn-light" href={ACCOUNT_BACKUP}>
 							backup my account
 						</a>
 					</div>

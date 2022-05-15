@@ -8,6 +8,7 @@ import iconRotate from '../../assets/imgs/iconRotate.svg?url'
 import { blobToDataURL } from '../../lib/canvas'
 import { Cropper, CropperRef } from '../../components/cropper'
 import { CREATE_ACCOUNT } from '../../routes'
+import { JSXInternal } from 'preact/src/jsx'
 
 export const CreateAvatar = (_: RouteComponentProps) => {
 	const [avatar, setAvatar] = useState<string>('')
@@ -15,9 +16,9 @@ export const CreateAvatar = (_: RouteComponentProps) => {
 
 	const [profile, setProfile] = useStore.profile()
 
-	// TODO: Type the file change event
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const onFileChange = async (event: any) => {
+	const onFileChange = async (
+		event: JSXInternal.TargetedEvent<HTMLInputElement, Event>
+	) => {
 		if (!(event.target instanceof HTMLInputElement)) {
 			return
 		}

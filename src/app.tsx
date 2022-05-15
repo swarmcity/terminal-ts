@@ -1,4 +1,4 @@
-import { Router, Redirect } from '@reach/router'
+import { Router } from '@reach/router'
 import { Provider as WagmiProvider } from 'wagmi'
 import {
 	InfuraProvider,
@@ -10,9 +10,11 @@ import {
 // Pages
 import { Login } from './pages/login'
 import { Home } from './pages/home'
-import { CreateAccount } from './pages/create-account/create-account'
+import { SetupProfile } from './pages/create-account/setup-profile'
 import { AccountCreated } from './pages/create-account/created'
 import { CreateAvatar } from './pages/create-account/create-avatar'
+import { ChoosePassword } from './pages/create-account/choose-password'
+import { Backup } from './pages/create-account/backup'
 
 import * as ROUTES from './routes'
 
@@ -35,9 +37,11 @@ export function App() {
 			<WagmiProvider provider={provider} webSocketProvider={webSocketProvider}>
 				<Router>
 					<Login path={ROUTES.LOGIN} />
-					<CreateAccount path={ROUTES.CREATE_ACCOUNT} />
+					<SetupProfile path={ROUTES.CREATE_ACCOUNT} />
 					<AccountCreated path={ROUTES.ACCOUNT_CREATED} />
 					<CreateAvatar path={ROUTES.CREATE_AVATAR} />
+					<ChoosePassword path={ROUTES.ACCOUNT_PASSWORD} />
+					<Backup path={ROUTES.ACCOUNT_BACKUP} />
 					<Home path={ROUTES.HOME} />
 				</Router>
 			</WagmiProvider>
