@@ -7528,7 +7528,11 @@ body #app figure {
 body #app figure.avatar {
   display: flex;
   width: 90px;
+  height: 90px;
   margin: 60px auto;
+}
+body #app figure.avatar img {
+  border-radius: 100%;
 }
 @media screen and (min-width: 768px) {
   body #app figure.avatar {

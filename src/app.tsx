@@ -12,6 +12,7 @@ import { Login } from './pages/login'
 import { Home } from './pages/home'
 import { CreateAccount } from './pages/create-account/create-account'
 import { AccountCreated } from './pages/create-account/created'
+import { CreateAvatar } from './pages/create-account/create-avatar'
 
 import * as ROUTES from './routes'
 
@@ -36,6 +37,7 @@ export function App() {
 					<Login path={ROUTES.LOGIN} />
 					<CreateAccount path={ROUTES.CREATE_ACCOUNT} />
 					<AccountCreated path={ROUTES.ACCOUNT_CREATED} />
+					<CreateAvatar path={ROUTES.CREATE_AVATAR} />
 					<Home path={ROUTES.HOME} />
 				</Router>
 			</WagmiProvider>

@@ -1,13 +1,8 @@
-// Components
-import { Cropper, CropperRef } from '../../components/cropper'
-
-// Lib
-import { blobToDataURL } from '../../lib/canvas'
 import { useStore } from '../../store'
 import avatarDefault from '../../assets/imgs/avatar.svg?url'
 import arrowUp from '../../assets/imgs/arrowUp.svg?url'
-import { useState, useRef } from 'preact/hooks'
-import { ACCOUNT_CREATED } from '../../routes'
+import { useState } from 'preact/hooks'
+import { ACCOUNT_CREATED, CREATE_AVATAR } from '../../routes'
 import { ButtonRoundArrow } from '../../components/ButtonRoundArrow'
 import { ButtonClose } from '../../components/ButtonClose'
 
@@ -19,71 +14,6 @@ export const SetupProfile = () => {
 	const [step, setStep] = useState<State>('username')
 	const [password, setPassword] = useState<string>('')
 	const [password2, setPassword2] = useState<string>('')
-	const cropperRef = useRef<CropperRef>(null)
-	const [cropper, setCropper] = useState(false)
-	const [avatar, setAvatar] = useState<string>(avatarDefault)
-	const [blob, setBlob] = useState<Blob>()
-
-	const updateAvatar = async () => {
-		if (!cropperRef.current) {
-			throw new Error('cropperRef not set')
-		}
-
-		try {
-			const blob = await cropperRef.current?.getImage()
-
-			setBlob(blob)
-			setAvatar(URL.createObjectURL(blob))
-			setCropper(false)
-		} catch (err) {
-			console.error(err)
-		}
-	}
-
-	const onChange = ({
-		currentTarget,
-	}: JSX.TargetedEvent<HTMLInputElement, Event>) => {
-		setProfile({ username: currentTarget.value })
-	}
-
-	// TODO: Type the file change event
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const onFileChange = async (event: any) => {
-		if (!(event.target instanceof HTMLInputElement)) {
-			return
-		}
-
-		if (event.target.files?.length) {
-			const file = event.target.files[0]
-			setAvatar(await blobToDataURL(file))
-		}
-	}
-
-	if (cropper) {
-		return (
-			<>
-				<h1 class="text-3xl mb-8">Choose an avatar.</h1>
-				<div class="form-control">
-					<Cropper ref={cropperRef} wrapperClass="mb-8" image={avatar} />
-				</div>
-				<label class="mb-4 block cursor-pointer underline decoration-dotted">
-					<input
-						type="file"
-						onChange={onFileChange}
-						accept="image/*"
-						class="hidden"
-					/>
-					choose another file
-				</label>
-				<button class="btn mr-4" onClick={() => setCropper(false)}>
-					Cancel
-				</button>
-				<button class="btn" onClick={() => updateAvatar()}>
-					Next
-				</button>
-			</>
-		)
-	}
 
 	if (step === 'username')
 		return (
@@ -97,22 +27,28 @@ export const SetupProfile = () => {
 							<h1>Choose a username and an avatar.</h1>
 						</header>
 						<div class="content">
-							<figure class="avatar">
-								<a href="user-create-avatar.html">
-									<img src={avatar} alt="user avatar" />
-								</a>
-								<a
-									class="btn-icon btn-info btn-upload"
-									href="user-create-avatar.html"
-								>
-									<img src={arrowUp} />
-								</a>
-							</figure>
+							<a href={CREATE_AVATAR}>
+								<figure class="avatar">
+									<img
+										src={profile?.avatar || avatarDefault}
+										alt="user avatar"
+									/>
+									<a class="btn-icon btn-info btn-upload" href={CREATE_AVATAR}>
+										<img src={arrowUp} />
+									</a>
+								</figure>
+							</a>
 							<form>
 								<label for="username" class="form-label">
 									Username
 								</label>
-								<input type="text" id="username" onChange={onChange} />
+								<input
+									type="text"
+									id="username"
+									onChange={(e) =>
+										setProfile({ ...profile, username: e.currentTarget.value })
+									}
+								/>
 							</form>
 						</div>
 						<div class="btns">
