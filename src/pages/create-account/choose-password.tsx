@@ -3,7 +3,7 @@ import warningBlue from '../../assets/imgs/warningBlue.svg?url'
 import { ACCOUNT_CREATED } from '../../routes'
 import { navigate, RouteComponentProps } from '@reach/router'
 import { Wallet } from 'ethers'
-import { ButtonClose } from '../../components/ButtonClose'
+import { UserCreateStop } from '../user-create-stop'
 import { ButtonRoundArrow } from '../../components/ButtonRoundArrow'
 import { useStore } from '../../store'
 
@@ -34,7 +34,7 @@ export const ChoosePassword = (_: Props) => {
 		return (
 			<div class="bg-gray-lt password-warning">
 				<div class="close">
-					<ButtonClose />
+					<UserCreateStop />
 				</div>
 				<div class="container">
 					<main class="flex-space">
@@ -58,7 +58,7 @@ export const ChoosePassword = (_: Props) => {
 	return (
 		<div class="bg-gray-lt choose-password">
 			<div class="close">
-				<ButtonClose />
+				<UserCreateStop />
 			</div>
 			<div class="container">
 				<main class="flex-space">

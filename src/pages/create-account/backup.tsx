@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'preact/hooks'
 import { RouteComponentProps } from '@reach/router'
-import { ButtonClose } from '../../components/ButtonClose'
+import { UserCreateStop } from '../user-create-stop'
 import warningBlue from '../../assets/imgs/warningBlue.svg?url'
 import { useStore } from '../../store'
 import { ButtonRoundArrow } from '../../components/ButtonRoundArrow'
@@ -38,7 +38,7 @@ export const Backup = (_: Props) => {
 		return (
 			<div class="bg-gray-lt download-file">
 				<div class="close">
-					<ButtonClose href="user-create-stop.html" />
+					<UserCreateStop />
 				</div>
 				<div class="container">
 					<main class="flex-space">
@@ -66,9 +66,7 @@ export const Backup = (_: Props) => {
 	return (
 		<div class="bg-gray-lt download-success">
 			<div class="close">
-				<a href="user-exit.html">
-					<img src="assets/imgs/close.svg" />
-				</a>
+				<UserCreateStop />
 			</div>
 			<div class="container">
 				<main class="flex-space">

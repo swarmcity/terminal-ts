@@ -1,7 +1,7 @@
 // Store
 import { RouteComponentProps } from '@reach/router'
 import { useStore } from '../../store'
-import { ButtonClose } from '../../components/ButtonClose'
+import { UserCreateStop } from '../user-create-stop'
 import avatarDefault from '../../assets/imgs/avatar.svg?url'
 import { ACCOUNT_BACKUP } from '../../routes'
 
@@ -17,7 +17,7 @@ export const AccountCreated = (_: RouteComponentProps) => {
 	return (
 		<div class="bg-gray-lt account-complete">
 			<div class="close">
-				<ButtonClose href="user-create-stop.html" />
+				<UserCreateStop />
 			</div>
 			<div class="container">
 				<main class="flex-space">

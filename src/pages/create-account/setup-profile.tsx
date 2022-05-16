@@ -3,7 +3,7 @@ import avatarDefault from '../../assets/imgs/avatar.svg?url'
 import arrowUp from '../../assets/imgs/arrowUp.svg?url'
 import { CREATE_AVATAR, ACCOUNT_PASSWORD } from '../../routes'
 import { ButtonRoundArrow } from '../../components/ButtonRoundArrow'
-import { ButtonClose } from '../../components/ButtonClose'
+import { UserCreateStop } from '../user-create-stop'
 import { RouteComponentProps } from '@reach/router'
 
 type Props = RouteComponentProps
@@ -14,7 +14,7 @@ export const SetupProfile = (_: Props) => {
 	return (
 		<div class="bg-gray-lt choose-username">
 			<div class="close">
-				<ButtonClose />
+				<UserCreateStop />
 			</div>
 			<div class="container">
 				<main class="flex-space">

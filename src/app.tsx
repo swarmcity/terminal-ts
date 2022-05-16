@@ -15,6 +15,7 @@ import { AccountCreated } from './pages/create-account/created'
 import { CreateAvatar } from './pages/create-account/create-avatar'
 import { ChoosePassword } from './pages/create-account/choose-password'
 import { Backup } from './pages/create-account/backup'
+import { Account } from './pages/account'
 
 import * as ROUTES from './routes'
 
@@ -42,6 +43,7 @@ export function App() {
 					<CreateAvatar path={ROUTES.CREATE_AVATAR} />
 					<ChoosePassword path={ROUTES.ACCOUNT_PASSWORD} />
 					<Backup path={ROUTES.ACCOUNT_BACKUP} />
+					<Account path={ROUTES.ACCOUNT} />
 					<Home path={ROUTES.HOME} />
 				</Router>
 			</WagmiProvider>
