@@ -12,7 +12,6 @@ import { Login } from './pages/login'
 import { Home } from './pages/home'
 import { SetupProfile } from './pages/create-account/setup-profile'
 import { AccountCreated } from './pages/create-account/created'
-import { CreateAvatar } from './pages/create-account/create-avatar'
 import { ChoosePassword } from './pages/create-account/choose-password'
 import { Backup } from './pages/create-account/backup'
 import { Account } from './pages/account'
@@ -40,7 +39,6 @@ export function App() {
 					<Login path={ROUTES.LOGIN} />
 					<SetupProfile path={ROUTES.CREATE_ACCOUNT} />
 					<AccountCreated path={ROUTES.ACCOUNT_CREATED} />
-					<CreateAvatar path={ROUTES.CREATE_AVATAR} />
 					<ChoosePassword path={ROUTES.ACCOUNT_PASSWORD} />
 					<Backup path={ROUTES.ACCOUNT_BACKUP} />
 					<Account path={ROUTES.ACCOUNT} />

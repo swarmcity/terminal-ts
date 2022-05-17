@@ -1,10 +1,11 @@
 import { useStore } from '../../store'
 import avatarDefault from '../../assets/imgs/avatar.svg?url'
 import arrowUp from '../../assets/imgs/arrowUp.svg?url'
-import { CREATE_AVATAR, ACCOUNT_PASSWORD } from '../../routes'
+import { ACCOUNT_PASSWORD } from '../../routes'
 import { ButtonRoundArrow } from '../../components/ButtonRoundArrow'
 import { UserCreateStop } from '../user-create-stop'
 import { RouteComponentProps } from '@reach/router'
+import { CreateAvatar } from './create-avatar'
 
 type Props = RouteComponentProps
 
@@ -22,14 +23,14 @@ export const SetupProfile = (_: Props) => {
 						<h1>Choose a username and an avatar.</h1>
 					</header>
 					<div class="content">
-						<a href={CREATE_AVATAR}>
+						<CreateAvatar>
 							<figure class="avatar">
 								<img src={profile?.avatar || avatarDefault} alt="user avatar" />
-								<a class="btn-icon btn-info btn-upload" href={CREATE_AVATAR}>
+								<a class="btn-icon btn-info btn-upload">
 									<img src={arrowUp} />
 								</a>
 							</figure>
-						</a>
+						</CreateAvatar>
 						<form>
 							<label for="username" class="form-label">
 								Username

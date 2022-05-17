@@ -1,7 +1,6 @@
 export const LOGIN = '/login'
 export const HOME = '/'
 export const CREATE_ACCOUNT = '/create-account'
-export const CREATE_AVATAR = '/create-avatar'
 export const ACCOUNT_PASSWORD = '/account_password'
 export const ACCOUNT_CREATED = '/account-created'
 export const ACCOUNT_BACKUP = '/account-backup'
