@@ -22,13 +22,21 @@ export function ButtonRoundArrow({ disabled, direction, ...other }: Props) {
 			rotation = 0
 			break
 	}
+
+	const img = (
+		<img src={caretNext} style={{ transform: `rotate(${rotation}deg)` }} />
+	)
+
+	if (disabled)
+		return (
+			<span class="btn-icon" style={{ cursor: 'not-allowed', opacity: 0.5 }}>
+				{img}
+			</span>
+		)
+
 	return (
-		<a
-			role="button"
-			class={`btn-icon ${disabled ? 'btn-disabled' : ''}`}
-			{...other}
-		>
-			<img src={caretNext} style={{ transform: `rotate(${rotation}deg)` }} />
+		<a role="button" class={'btn-icon'} {...other}>
+			{img}
 		</a>
 	)
 }
