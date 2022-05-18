@@ -1,6 +1,6 @@
 import { useState } from 'preact/hooks'
 import { ButtonClose } from '../../components/ButtonClose'
-import checkMarkRed from '../assets/imgs/checkMarkRed.svg?url'
+import checkMarkRed from '../../assets/imgs/checkMarkRed.svg?url'
 import { LOGIN } from '../../routes'
 
 export const UserCreateStop = () => {

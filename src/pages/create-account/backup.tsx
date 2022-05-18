@@ -95,35 +95,4 @@ export const Backup = (_: Props) => {
 			</div>
 		</div>
 	)
-
-	// return (
-	// 	<div class="flex flex-col">
-	// 		<h1 class="text-3xl mb-8">Save the file in a safe location</h1>
-	// 		<div class="pt-2 mb-8">
-	// 			<p class="mb-4">
-	// 				A download should begin. Save the file somehwere safe. With this file
-	// 				you will alwasy be able to get access to the funds on your wallet.
-	// 			</p>
-	// 			<p class="mb-4">
-	// 				The private key of your account is encrypted with your password.
-	// 			</p>
-	// 			<a
-	// 				style={{
-	// 					textDecoration: 'underline dotted',
-	// 					color: 'blue',
-	// 					cursor: 'pointer',
-	// 				}}
-	// 				onClick={() => downloadFile()}
-	// 			>
-	// 				force download
-	// 			</a>
-	// 		</div>
-	// 		<button
-	// 			class="btn place-self-center"
-	// 			onClick={() => setShowPrompt(false)}
-	// 		>
-	// 			Enter Swarm City
-	// 		</button>
-	// 	</div>
-	// )
 }

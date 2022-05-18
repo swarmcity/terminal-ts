@@ -1,13 +1,13 @@
 import { Link, RouteComponentProps } from '@reach/router'
 import { ButtonClose } from '../components/ButtonClose'
-import { CREATE_ACCOUNT } from '../routes'
+import { ACCOUNT_RESTORE, CREATE_ACCOUNT, HOME } from '../routes'
 
 type LoginProps = RouteComponentProps
 
 export const Login = (_: LoginProps) => (
 	<div class="bg-info create-account">
 		<div class="close">
-			<ButtonClose href="index.html" variant="light" />
+			<ButtonClose href={HOME} variant="light" />
 		</div>
 		<div class="container">
 			<main class=" flex-space">
@@ -22,7 +22,7 @@ export const Login = (_: LoginProps) => (
 					<Link className="btn btn-info" to={CREATE_ACCOUNT}>
 						create account
 					</Link>
-					<a class="btn btn-info" href="user-restore-file.html">
+					<a class="btn btn-info" href={ACCOUNT_RESTORE}>
 						restore account
 					</a>
 				</div>

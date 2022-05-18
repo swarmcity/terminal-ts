@@ -1,7 +1,7 @@
 // Store
 import { RouteComponentProps } from '@reach/router'
 import { useStore } from '../../store'
-import { UserCreateStop } from '../user-create-stop'
+import { UserCreateStop } from '../modals/user-create-stop'
 import avatarDefault from '../../assets/imgs/avatar.svg?url'
 import { ACCOUNT_BACKUP } from '../../routes'
 
