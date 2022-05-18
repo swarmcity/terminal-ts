@@ -31,29 +31,27 @@ export const AccountRestore = (_: Props) => {
 
 	if (!confirmed && !restoredProfile)
 		return (
-			<div id="app">
-				<div class="bg-gray-lt py-60 restore">
-					<div class="close">
-						<UserCreateStop />
-					</div>
-					<div class="container">
-						<main class="flex-space">
-							<header>
-								<h1>Upload and unlock your account file.</h1>
-							</header>
-							<div class="btns">
-								<label class="btn btn-light">
-									<input
-										type="file"
-										onChange={onFileChange}
-										accept="application/json"
-										hidden
-									/>
-									select file
-								</label>
-							</div>
-						</main>
-					</div>
+			<div class="bg-gray-lt py-60 restore">
+				<div class="close">
+					<UserCreateStop />
+				</div>
+				<div class="container">
+					<main class="flex-space">
+						<header>
+							<h1>Upload and unlock your account file.</h1>
+						</header>
+						<div class="btns">
+							<label class="btn btn-light">
+								<input
+									type="file"
+									onChange={onFileChange}
+									accept="application/json"
+									hidden
+								/>
+								select file
+							</label>
+						</div>
+					</main>
 				</div>
 			</div>
 		)
