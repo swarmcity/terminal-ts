@@ -62,7 +62,7 @@ describe('app.tsx', () => {
 			(el) => el.textContent
 		)
 
-		expect(createAccountBtnText).toBe('Create account')
+		expect(createAccountBtnText).toBe('create account')
 		const url = page.url()
 		expect(url).toEqual(PAGES.createAccount)
 	})
@@ -80,7 +80,9 @@ describe('app.tsx', () => {
 		const username = 'testusername'
 		await page.keyboard.type(username)
 
-		let nextButton = await page.waitForSelector('button')
+		let nextButton = await page.waitForSelector(
+			'a[role="button"][class="btn-icon"]'
+		)
 		await nextButton.click()
 
 		// Choose your password page with warning
@@ -88,7 +90,9 @@ describe('app.tsx', () => {
 		headerText = await headerElement.evaluate((el) => el.textContent)
 		expect(headerText).toBe('Choose a password.')
 
-		nextButton = await page.waitForSelector('button')
+		nextButton = await page.waitForSelector(
+			'a[role="button"][class="btn-icon"]'
+		)
 		await nextButton.click()
 
 		// Choose your password page with two inputs
@@ -106,19 +110,19 @@ describe('app.tsx', () => {
 			await page.keyboard.type(password)
 		}
 
-		nextButton = await page.waitForSelector('button')
+		nextButton = await page.waitForSelector(
+			'a[role="button"][class="btn-icon"]'
+		)
 		await nextButton.click()
 
-		nextButton = await page.waitForSelector('button:not([disabled])')
+		// Wait for encryption to end
+		nextButton = await page.waitForSelector('a[href="/account-backup"]')
 
 		// Final page
 		headerElement = await page.waitForSelector('h1')
 		headerText = await headerElement.evaluate((el) => el.textContent)
 		expect(headerText).toBe('Great!')
 		await nextButton.click()
-
-		page.on('request', (request) => console.log(request))
-		page.on('response', (response) => console.log(response))
 
 		// Backup account
 		headerElement = await page.waitForSelector('h1')
@@ -130,7 +134,9 @@ describe('app.tsx', () => {
 			await unlink(walletPath)
 		} catch (_) {}
 
-		nextButton = await page.waitForSelector('button')
+		nextButton = await page.waitForSelector(
+			'a[role="button"][class="btn-icon"]'
+		)
 		await nextButton.click()
 
 		// Check automatic file download

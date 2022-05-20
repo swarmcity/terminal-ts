@@ -83,7 +83,7 @@ export const ChoosePassword = (_: Props) => {
 					<p>{loading && 'Encrypting...'}</p>
 					<div class="btns">
 						<ButtonRoundArrow
-							disabled={password !== password2}
+							disabled={password !== password2 || loading}
 							onClick={onClick}
 						/>
 					</div>
