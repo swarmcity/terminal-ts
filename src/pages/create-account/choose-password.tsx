@@ -79,11 +79,15 @@ export const ChoosePassword = (_: Props) => {
 							onChange={(e) => setPassword2(e.currentTarget.value)}
 						/>
 					</form>
-					<p class="error">{password !== password2 && 'Password mismatch'}</p>
-					<p>{loading && 'Encrypting...'}</p>
+					<div style={{ height: '100px', width: '100%' }}>
+						{loading && <p>Encrypting...</p>}
+						{password2 && password !== password2 && (
+							<p class="error">Password mismatch</p>
+						)}
+					</div>
 					<div class="btns">
 						<ButtonRoundArrow
-							disabled={password !== password2 || loading}
+							disabled={!password || password !== password2 || loading}
 							onClick={onClick}
 						/>
 					</div>

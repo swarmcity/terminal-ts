@@ -12,7 +12,6 @@ type Props = RouteComponentProps
 export const SetupProfile = (_: Props) => {
 	const [profile, setProfile] = useStore.profile()
 
-
 	return (
 		<div class="bg-gray-lt choose-username">
 			<div class="close">
