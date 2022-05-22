@@ -1,13 +1,16 @@
-import { useStore } from '../store'
+import type { RouteComponentProps } from '@reach/router'
+import { useState } from 'preact/hooks'
+import type { JSXInternal } from 'preact/src/jsx'
+
+// Assets
 import avatarDefault from '../assets/imgs/avatar.svg?url'
 import checkMarkBlue from '../assets/imgs/checkMarkBlue.svg?url'
 import cancel from '../assets/imgs/cancel.svg?url'
+
+import { useStore } from '../store'
 import { ACCOUNT } from '../routes'
 import { UserCreateStop } from './modals/user-create-stop'
-import { RouteComponentProps } from '@reach/router'
-import { useState } from 'preact/hooks'
-import { Profile } from '../types/profile'
-import { JSXInternal } from 'preact/src/jsx'
+import type { Profile } from '../types/profile'
 
 type Props = RouteComponentProps
 
