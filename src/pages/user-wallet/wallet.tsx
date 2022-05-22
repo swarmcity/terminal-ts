@@ -3,11 +3,54 @@ import { RouteComponentProps } from '@reach/router'
 import { useStore } from '../../store'
 import { ButtonClose } from '../../components/ButtonClose'
 import { ACCOUNT } from '../../routes'
+import { useState } from 'preact/hooks'
+import cancelButton from '../../assets/imgs/cancel.svg'
+import sendButton from '../../assets/imgs/caretNext.svg'
 
 export const AccountWallet = (_: RouteComponentProps) => {
 	const [profile] = useStore.profile()
 
-	const { username, avatar } = profile
+	const [sendShown, setSendShown] = useState<boolean>(true)
+
+	let sendView
+
+	if (sendShown) {
+		sendView = (
+			<div class="flex-space">
+				<a onClick={() => setSendShown(false)} class="btn btn-info">
+					send DAI
+				</a>
+				<a href="user-keys-public-qr.html" class="btn btn-info">
+					receive
+				</a>
+			</div>
+		)
+	} else {
+		sendView = (
+			<div class="flex-space">
+				<form class="send" _lpchecked="1">
+					<div class="input-group">
+						<input type="text" id="amt-send" />
+						<label for="amt-send">Amount to send</label>
+					</div>
+					<label for="rec-address">Receiver's address</label>
+					<input
+						type="text"
+						id="rec-address"
+						placeholder="Receiver's address"
+					/>
+					<div class="btns btn-icons">
+						<a class="close" onClick={() => setSendShown(true)}>
+							<img src={cancelButton} />
+						</a>
+						<a class="btn-icon">
+							<img src={sendButton} />
+						</a>
+					</div>
+				</form>
+			</div>
+		)
+	}
 
 	if (!profile) {
 		return <div>Error: no profile</div>
@@ -32,16 +75,7 @@ export const AccountWallet = (_: RouteComponentProps) => {
 				</div>
 			</div>
 			<div class="divider short" />
-			<div class="container">
-				<div class="flex-space">
-					<a href="user-wallet-send.html" class="btn btn-info">
-						send DAI
-					</a>
-					<a href="user-keys-public-qr.html" class="btn btn-info">
-						receive
-					</a>
-				</div>
-			</div>
+			<div class="container">{sendView}</div>
 			<div class="divider short" />
 			<div class="container">
 				<div class="flex-space">
