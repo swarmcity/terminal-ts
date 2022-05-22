@@ -77,7 +77,6 @@ export const CreateAvatar = ({ children }: Props) => {
 								e.stopPropagation()
 								setAvatar('')
 								setShown(false)
-								console.log('should be hidden')
 							}}
 						>
 							<img src={cancel} />
