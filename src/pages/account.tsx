@@ -30,7 +30,7 @@ export const Account = (_: Props) => {
 								{profile?.username}
 							</a>
 							<div>
-								<a href="#" class="wallet-balance">
+								<a href="account-wallet" class="wallet-balance">
 									0 DAI
 								</a>
 							</div>

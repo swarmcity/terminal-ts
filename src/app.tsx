@@ -16,7 +16,7 @@ import { ChoosePassword } from './pages/create-account/choose-password'
 import { Backup } from './pages/create-account/backup'
 import { Account } from './pages/account'
 import { AccountRestore } from './pages/account-restore'
-
+import { AccountWallet } from './pages/user-wallet/wallet'
 import * as ROUTES from './routes'
 
 // Wagmi config
@@ -45,6 +45,7 @@ export function App() {
 					<Account path={ROUTES.ACCOUNT} />
 					<AccountRestore path={ROUTES.ACCOUNT_RESTORE} />
 					<Home path={ROUTES.HOME} />
+					<AccountWallet path={ROUTES.ACCOUNT_WALLET} />
 				</Router>
 			</WagmiProvider>
 		</>
