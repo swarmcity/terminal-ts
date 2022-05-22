@@ -1,28 +1,47 @@
 // Store
+import { RouteComponentProps } from '@reach/router'
 import { useStore } from '../../store'
+import { UserCreateStop } from '../modals/user-create-stop'
+import avatarDefault from '../../assets/imgs/avatar.svg?url'
+import { ACCOUNT_BACKUP } from '../../routes'
 
-type CreatedProps = {
-	onNext: () => void
-}
-
-export const Created = ({ onNext }: CreatedProps) => {
+export const AccountCreated = (_: RouteComponentProps) => {
 	const [profile] = useStore.profile()
 
 	if (!profile) {
 		return <div>Error: no profile</div>
 	}
 
-	const { username } = profile
+	const { username, avatar } = profile
 
 	return (
-		<>
-			<h1 class="text-3xl mb-4">Great!</h1>
-			<p>You now have a Swarm City account.</p>
-			<p class="mb-16">Let's create a backup!</p>
-			<p class="mb-16">{username}</p>
-			<button class="btn" onClick={onNext}>
-				Backup my account
-			</button>
-		</>
+		<div class="bg-gray-lt account-complete">
+			<div class="close">
+				<UserCreateStop />
+			</div>
+			<div class="container">
+				<main class="flex-space">
+					<header>
+						<h1>Great!</h1>
+						<p>
+							You now have a Swarm City account.
+							<br />
+							Let's create a backup!
+						</p>
+					</header>
+					<div class="content">
+						<figure class="avatar">
+							<img src={avatar || avatarDefault} alt="user avatar" />
+						</figure>
+						<p class="username">{username}</p>
+					</div>
+					<div class="btns">
+						<a class="btn btn-light" href={ACCOUNT_BACKUP}>
+							backup my account
+						</a>
+					</div>
+				</main>
+			</div>
+		</div>
 	)
 }

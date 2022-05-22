@@ -1,4 +1,4 @@
-import { Router, Redirect } from '@reach/router'
+import { Router } from '@reach/router'
 import { Provider as WagmiProvider } from 'wagmi'
 import {
 	InfuraProvider,
@@ -9,7 +9,15 @@ import {
 
 // Pages
 import { Login } from './pages/login'
-import { CreateAccount } from './pages/create-account/create-account'
+import { Home } from './pages/home'
+import { SetupProfile } from './pages/create-account/setup-profile'
+import { AccountCreated } from './pages/create-account/created'
+import { ChoosePassword } from './pages/create-account/choose-password'
+import { Backup } from './pages/create-account/backup'
+import { Account } from './pages/account'
+import { AccountRestore } from './pages/account-restore'
+
+import * as ROUTES from './routes'
 
 // Wagmi config
 // TODO: Move this to env variable or config file
@@ -29,9 +37,14 @@ export function App() {
 		<>
 			<WagmiProvider provider={provider} webSocketProvider={webSocketProvider}>
 				<Router>
-					<Redirect from="/" to="/login" noThrow />
-					<Login path="/login" />
-					<CreateAccount path="/create-account" />
+					<Login path={ROUTES.LOGIN} />
+					<SetupProfile path={ROUTES.CREATE_ACCOUNT} />
+					<AccountCreated path={ROUTES.ACCOUNT_CREATED} />
+					<ChoosePassword path={ROUTES.ACCOUNT_PASSWORD} />
+					<Backup path={ROUTES.ACCOUNT_BACKUP} />
+					<Account path={ROUTES.ACCOUNT} />
+					<AccountRestore path={ROUTES.ACCOUNT_RESTORE} />
+					<Home path={ROUTES.HOME} />
 				</Router>
 			</WagmiProvider>
 		</>

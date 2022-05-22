@@ -1,115 +1,98 @@
 import { useState } from 'preact/hooks'
-import cn from 'classnames'
+import warningBlue from '../../assets/imgs/warningBlue.svg?url'
+import { ACCOUNT_CREATED } from '../../routes'
+import { navigate, RouteComponentProps } from '@reach/router'
+import { Wallet } from 'ethers'
+import { UserCreateStop } from '../modals/user-create-stop'
+import { ButtonRoundArrow } from '../../components/ButtonRoundArrow'
+import { useStore } from '../../store'
 
-// Types
-import type { Wallet } from 'ethers'
+type Props = RouteComponentProps
 
-// Icons
-import { ExclamationIcon } from '../../icons/exclamation'
-
-type ChoosePasswordProps = {
-	wallet: Wallet
-	onNext: (encryptedWallet: string) => void
-}
-
-export const ChoosePassword = ({ wallet, onNext }: ChoosePasswordProps) => {
-	const { mnemonic } = wallet
+export const ChoosePassword = (_: Props) => {
 	const [showPrompt, setShowPrompt] = useState(true)
+	const [profile, setProfile] = useStore.profile()
 	const [loading, setLoading] = useState(false)
-	const [passwords, setPasswords] = useState<[string, string]>(['', ''])
-	const changePassword = (
-		index: number,
-		{ currentTarget }: JSX.TargetedEvent<HTMLInputElement, Event>
-	) => {
-		const copy = [...passwords] as [string, string]
-		copy[index] = currentTarget.value
-		setPasswords(copy)
-	}
+	const [password, setPassword] = useState<string>('')
+	const [password2, setPassword2] = useState<string>('')
 
-	if (!mnemonic) {
-		return <div>Error: no mnemonic</div>
-	}
-
-	const passwordsFilledIn = passwords[0].length > 0 && passwords[1].length > 0
-	const passwordValid = passwords[0].length > 0 && passwords[0] === passwords[1]
-	const canNext = showPrompt || passwordValid
-
-	const goNext = async () => {
-		if (showPrompt) {
-			setShowPrompt(false)
-			return
-		}
-
-		if (!canNext || !mnemonic || loading) {
-			return
-		}
-
+	const onClick = () => {
 		setLoading(true)
-		onNext(await wallet.encrypt(passwords[0]))
-		setLoading(false)
+		const wallet = Wallet.createRandom()
+		wallet.encrypt(password).then((encryptedWallet) => {
+			setProfile({
+				...profile,
+				encryptedWallet,
+				address: wallet.address,
+			})
+			setLoading(false)
+			navigate(ACCOUNT_CREATED)
+		})
 	}
 
-	return (
-		<div class="flex flex-col">
-			<h1 class="text-3xl mb-8">Choose a password.</h1>
-			{showPrompt ? (
-				<div class="w-full indicator mb-8 mt-6">
-					<div class="indicator-item indicator-top indicator-center badge h-12">
-						<ExclamationIcon class="w-8 h-8 " />
-					</div>
-					<div class="card shadow place-items-center">
-						<div class="card-body bg-base-300 font-bold">
-							<div class="pt-2">
-								<p class="mb-4">
-									There is no password recovery available in Swarm City.
-								</p>
+	if (showPrompt)
+		return (
+			<div class="bg-gray-lt password-warning">
+				<div class="close">
+					<UserCreateStop />
+				</div>
+				<div class="container">
+					<main class="flex-space">
+						<header>
+							<h1>Choose a password.</h1>
+						</header>
+						<div class="warning-box">
+							<img src={warningBlue} />
+							<div>
+								<p>There is no password recovery available in Swarm City.</p>
 								<p>Choose your password with care.</p>
 							</div>
 						</div>
-					</div>
+						<div class="btns">
+							<ButtonRoundArrow onClick={() => setShowPrompt(false)} />
+						</div>
+					</main>
 				</div>
-			) : (
-				<>
-					<div class="form-control mb-4">
+			</div>
+		)
+	return (
+		<div class="bg-gray-lt choose-password">
+			<div class="close">
+				<UserCreateStop />
+			</div>
+			<div class="container">
+				<main class="flex-space">
+					<header>
+						<h1>Choose a password.</h1>
+					</header>
+					<form>
 						<input
 							type="password"
-							class={cn(
-								'input',
-								'input-bordered',
-								passwordsFilledIn && !passwordValid && 'input-error'
-							)}
-							placeholder="Password"
-							onChange={(event) => changePassword(0, event)}
+							id="password"
+							placeholder="password"
+							onChange={(e) => setPassword(e.currentTarget.value)}
 						/>
-					</div>
-					<div class="form-control mb-4">
 						<input
 							type="password"
-							class={cn(
-								'input',
-								'input-bordered',
-								passwordsFilledIn && !passwordValid && 'input-error'
-							)}
-							placeholder="Confirm password"
-							onChange={(event) => changePassword(1, event)}
+							id="passwordConfirm"
+							placeholder="confirm password"
+							onChange={(e) => setPassword2(e.currentTarget.value)}
 						/>
-					</div>
-					<p class="mb-4">
-						{passwordsFilledIn && !passwordValid ? (
-							'Password mismatch'
-						) : (
-							<>&nbsp;</>
+					</form>
+					<div style={{ height: '100px', width: '100%' }}>
+						{loading && <p>Encrypting...</p>}
+						{password2 && password !== password2 && (
+							<p class="error">Password mismatch</p>
 						)}
-					</p>
-				</>
-			)}
-			<button
-				class={cn('btn w-min place-self-center', loading && 'loading')}
-				onClick={goNext}
-				disabled={!canNext || loading}
-			>
-				Next
-			</button>
+					</div>
+					<div class="btns">
+						<ButtonRoundArrow
+							disabled={!password || password !== password2 || loading}
+							onClick={onClick}
+						/>
+					</div>
+				</main>
+			</div>
 		</div>
 	)
 }

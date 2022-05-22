@@ -16,7 +16,8 @@ type CropperProps = Pick<CropProps, 'image'> & {
 }
 
 export type CropperRef = {
-	getImage: () => Promise<Blob>
+	getImage: () => Promise<string>
+	rotateCW: () => void
 }
 
 const CropperInner = (
@@ -40,6 +41,7 @@ const CropperInner = (
 
 			return await getCroppedImage(image, croppedAreaPixels, rotation)
 		},
+		rotateCW: () => setRotation(rotation + 90),
 	}))
 
 	return (
