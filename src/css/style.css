@@ -7571,6 +7571,7 @@ body #app figure {
 }
 body #app figure.avatar {
   display: flex;
+  cursor: pointer;
   width: 90px;
   height: 90px;
   margin: 60px auto;
