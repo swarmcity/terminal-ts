@@ -1,56 +1,73 @@
-// Store
-import { RouteComponentProps } from '@reach/router'
-import { useStore } from '../../store'
-import { ButtonClose } from '../../components/ButtonClose'
-import { ACCOUNT } from '../../routes'
 import { useState } from 'preact/hooks'
+
+// Components
+import { ButtonClose } from '../../components/ButtonClose'
+
+// Store and routes
+import { ACCOUNT } from '../../routes'
+import { useStore } from '../../store'
+
+// Assets
 import cancelButton from '../../assets/imgs/cancel.svg'
 import sendButton from '../../assets/imgs/caretNext.svg'
 
+// Types
+import type { FunctionComponent } from 'preact'
+import type { RouteComponentProps } from '@reach/router'
+
+enum View {
+	Menu,
+	Send,
+	Receive,
+}
+
+type ChangeView = {
+	setView: (view: View) => void
+}
+
+const Menu = ({ setView }: ChangeView) => (
+	<div class="flex-space">
+		<a onClick={() => setView(View.Send)} class="btn btn-info">
+			send DAI
+		</a>
+		<a onClick={() => setView(View.Receive)} class="btn btn-info">
+			receive
+		</a>
+	</div>
+)
+
+const Send = ({ setView }: ChangeView) => (
+	<div class="flex-space user-wallet-send">
+		<form class="send">
+			<div class="input-group">
+				<input type="text" id="amt-send" />
+				<label for="amt-send">Amount to send</label>
+			</div>
+			<input type="text" id="rec-address" placeholder="Receiver's address" />
+			<div class="btns btn-icons">
+				<a class="close" onClick={() => setView(View.Menu)}>
+					<img src={cancelButton} />
+				</a>
+				<a class="btn-icon">
+					<img src={sendButton} />
+				</a>
+			</div>
+		</form>
+	</div>
+)
+
+const Receive = () => null
+
+const VIEWS: Record<View, FunctionComponent<ChangeView>> = {
+	[View.Menu]: Menu,
+	[View.Send]: Send,
+	[View.Receive]: Receive,
+}
+
 export const AccountWallet = (_: RouteComponentProps) => {
 	const [profile] = useStore.profile()
-
-	const [sendShown, setSendShown] = useState<boolean>(true)
-
-	let sendView
-
-	if (sendShown) {
-		sendView = (
-			<div class="flex-space">
-				<a onClick={() => setSendShown(false)} class="btn btn-info">
-					send DAI
-				</a>
-				<a href="user-keys-public-qr.html" class="btn btn-info">
-					receive
-				</a>
-			</div>
-		)
-	} else {
-		sendView = (
-			<div class="flex-space user-wallet-send">
-				<form class="send">
-					<div class="input-group">
-						<input type="text" id="amt-send" />
-						<label for="amt-send">Amount to send</label>
-					</div>
-					{/*<label for="rec-address">Receiver's address</label>*/}
-					<input
-						type="text"
-						id="rec-address"
-						placeholder="Receiver's address"
-					/>
-					<div class="btns btn-icons">
-						<a class="close" onClick={() => setSendShown(true)}>
-							<img src={cancelButton} />
-						</a>
-						<a class="btn-icon">
-							<img src={sendButton} />
-						</a>
-					</div>
-				</form>
-			</div>
-		)
-	}
+	const [view, setView] = useState<View>(View.Menu)
+	const ViewComponent = VIEWS[view]
 
 	if (!profile) {
 		return <div>Error: no profile</div>
@@ -74,7 +91,9 @@ export const AccountWallet = (_: RouteComponentProps) => {
 				</div>
 			</div>
 			<div class="divider short" />
-			<div class="container">{sendView}</div>
+			<div class="container">
+				<ViewComponent setView={setView} />
+			</div>
 			<div class="divider short" />
 			<div class="container">
 				<div class="flex-space">
