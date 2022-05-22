@@ -27,13 +27,13 @@ export const AccountWallet = (_: RouteComponentProps) => {
 		)
 	} else {
 		sendView = (
-			<div class="flex-space">
-				<form class="send" _lpchecked="1">
+			<div class="flex-space user-wallet-send">
+				<form class="send">
 					<div class="input-group">
 						<input type="text" id="amt-send" />
 						<label for="amt-send">Amount to send</label>
 					</div>
-					<label for="rec-address">Receiver's address</label>
+					{/*<label for="rec-address">Receiver's address</label>*/}
 					<input
 						type="text"
 						id="rec-address"
@@ -64,8 +64,7 @@ export const AccountWallet = (_: RouteComponentProps) => {
 			<div class="container">
 				<div class="flex-space">
 					<div class="wallet-balance">
-						44 DAI
-						<span class="usd">≈ 44 USD</span>
+						44 DAI <span class="usd"> ≈ 44 USD</span>
 					</div>
 					<div>
 						<a href="user-keys-public.html" class="link link-dark">
