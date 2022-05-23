@@ -5,7 +5,7 @@ import { Link, Redirect } from '@reach/router'
 import { ButtonClose } from '../../components/ButtonClose'
 
 // Store and routes
-import { LOGIN, ACCOUNT } from '../../routes'
+import { LOGIN, ACCOUNT, ACCOUNT_PUBLIC_WALLET } from '../../routes'
 import { useStore } from '../../store'
 
 // Assets
@@ -85,9 +85,9 @@ export const AccountWallet = (_: RouteComponentProps) => {
 						44 DAI <span class="usd"> ≈ 44 USD</span>
 					</div>
 					<div>
-						<a href="user-keys-public.html" class="link link-dark">
+						<Link to={ACCOUNT_PUBLIC_WALLET} className="link link-dark">
 							show my keys
-						</a>
+						</Link>
 					</div>
 				</div>
 			</div>
