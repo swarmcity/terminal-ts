@@ -35,7 +35,7 @@ export const AccountPublicWallet = (_: AccountPublicWalletProps) => {
 
 			<main class="flex-space">
 				<div class="container">
-					<p>Your public key:</p>
+					<p>Your address:</p>
 					<p class="key key-public">{profile.address}</p>
 					<div class="links">
 						<a
@@ -43,7 +43,7 @@ export const AccountPublicWallet = (_: AccountPublicWalletProps) => {
 							style={{ cursor: 'pointer' }}
 							onClick={() => copyAddress()}
 						>
-							copy public key
+							copy address
 						</a>
 						<a
 							class="link"
