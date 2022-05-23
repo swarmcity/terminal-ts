@@ -1,11 +1,11 @@
 import { useState } from 'preact/hooks'
-import { Link } from '@reach/router'
+import { Link, Redirect } from '@reach/router'
 
 // Components
 import { ButtonClose } from '../../components/ButtonClose'
 
 // Store and routes
-import { ACCOUNT } from '../../routes'
+import { LOGIN, ACCOUNT } from '../../routes'
 import { useStore } from '../../store'
 
 // Assets
@@ -71,7 +71,7 @@ export const AccountWallet = (_: RouteComponentProps) => {
 	const ViewComponent = VIEWS[view]
 
 	if (!profile) {
-		return <div>Error: no profile</div>
+		return <Redirect path={LOGIN} />
 	}
 
 	return (
