@@ -1,23 +1,20 @@
-import { navigate, RouteComponentProps } from '@reach/router'
-import logo from '../assets/imgs/logo.svg?url'
+import { Link } from '@reach/router'
+
+// Store and routes
 import { ACCOUNT, LOGIN } from '../routes'
 import { useStore } from '../store'
+
+// Assets
+import logo from '../assets/imgs/logo.svg?url'
+
+// Types
+import type { RouteComponentProps } from '@reach/router'
 
 type HomeProps = RouteComponentProps
 
 export const Home = (_: HomeProps) => {
 	const [profile] = useStore.profile()
-
-	const onClick = () => {
-		if (
-			profile &&
-			profile.address &&
-			profile.encryptedWallet &&
-			profile.username
-		)
-			navigate(ACCOUNT)
-		else navigate(LOGIN)
-	}
+	const hasProfile = profile?.encryptedWallet
 
 	return (
 		<>
@@ -34,9 +31,12 @@ export const Home = (_: HomeProps) => {
 									<span>city</span>
 								</h1>
 							</div>
-							<a className="btn btn-warning" onClick={onClick}>
+							<Link
+								className="btn btn-warning"
+								to={hasProfile ? ACCOUNT : LOGIN}
+							>
 								enter here
-							</a>
+							</Link>
 						</div>
 					</main>
 				</div>

@@ -1,11 +1,18 @@
+// Store and routes
 import { useStore } from '../../store'
+import { ACCOUNT_PASSWORD } from '../../routes'
+
+// Assets
 import avatarDefault from '../../assets/imgs/avatar.svg?url'
 import arrowUp from '../../assets/imgs/arrowUp.svg?url'
-import { ACCOUNT_PASSWORD } from '../../routes'
+
+// Components
 import { ButtonRoundArrow } from '../../components/ButtonRoundArrow'
 import { UserCreateStop } from '../modals/user-create-stop'
-import { RouteComponentProps } from '@reach/router'
 import { CreateAvatar } from '../modals/create-avatar'
+
+// Types
+import type { RouteComponentProps } from '@reach/router'
 
 type Props = RouteComponentProps
 
@@ -47,7 +54,7 @@ export const SetupProfile = (_: Props) => {
 					<div class="btns">
 						<ButtonRoundArrow
 							disabled={!profile?.username}
-							href={ACCOUNT_PASSWORD}
+							to={ACCOUNT_PASSWORD}
 						/>
 					</div>
 				</main>

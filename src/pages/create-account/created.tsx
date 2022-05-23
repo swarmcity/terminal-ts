@@ -1,9 +1,18 @@
 // Store
-import { RouteComponentProps } from '@reach/router'
+import { Link } from '@reach/router'
+
+// Store and routes
 import { useStore } from '../../store'
-import { UserCreateStop } from '../modals/user-create-stop'
-import avatarDefault from '../../assets/imgs/avatar.svg?url'
 import { ACCOUNT_BACKUP } from '../../routes'
+
+// Components
+import { UserCreateStop } from '../modals/user-create-stop'
+
+// Assets
+import avatarDefault from '../../assets/imgs/avatar.svg?url'
+
+// Types
+import type { RouteComponentProps } from '@reach/router'
 
 export const AccountCreated = (_: RouteComponentProps) => {
 	const [profile] = useStore.profile()
@@ -36,9 +45,9 @@ export const AccountCreated = (_: RouteComponentProps) => {
 						<p class="username">{username}</p>
 					</div>
 					<div class="btns">
-						<a class="btn btn-light" href={ACCOUNT_BACKUP}>
+						<Link className="btn btn-light" to={ACCOUNT_BACKUP}>
 							backup my account
-						</a>
+						</Link>
 					</div>
 				</main>
 			</div>

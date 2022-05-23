@@ -1,9 +1,18 @@
+import { Link } from '@reach/router'
+
+// Store and routes
+import { useStore } from '../store'
+import { HOME } from '../routes'
+
+// Components
+import { CreateAvatar } from './modals/create-avatar'
+
+// Assets
 import avatarDefault from '../assets/imgs/avatar.svg?url'
 import exit from '../assets/imgs/exit.svg?url'
-import { HOME } from '../routes'
-import { useStore } from '../store'
-import { RouteComponentProps } from '@reach/router'
-import { CreateAvatar } from './modals/create-avatar'
+
+// Types
+import type { RouteComponentProps } from '@reach/router'
 
 type Props = RouteComponentProps
 
@@ -13,9 +22,9 @@ export const Account = (_: Props) => {
 	return (
 		<div class="bg-gray-lt account-wallet">
 			<div class="icon-exit">
-				<a href={HOME}>
+				<Link to={HOME}>
 					<img src={exit} />
-				</a>
+				</Link>
 			</div>
 			<div class="container">
 				<main class="flex-space">
