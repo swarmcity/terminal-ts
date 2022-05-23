@@ -1,4 +1,4 @@
-import { ElementHandle } from 'puppeteer'
+import { ElementHandle, Page, errors } from 'puppeteer'
 import { access } from 'fs/promises'
 import { constants } from 'fs'
 
@@ -29,4 +29,30 @@ export async function checkFileDownloaded(
 			await sleep(interval)
 		}
 	}
+}
+
+export async function spaClick(
+	page: Page,
+	selector: string | ElementHandle<Element>,
+	timeout = 1000
+) {
+	const promise = page
+		.waitForNavigation({
+			waitUntil: 'networkidle0',
+			timeout,
+		})
+		.catch((err) => {
+			if (!(err instanceof errors.TimeoutError)) {
+				throw err
+			}
+		})
+
+	if (typeof selector === 'string') {
+		const button = await page.waitForSelector(selector)
+		await button.click()
+	} else {
+		await selector.click()
+	}
+
+	await promise
 }
