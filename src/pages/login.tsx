@@ -7,7 +7,7 @@ type LoginProps = RouteComponentProps
 export const Login = (_: LoginProps) => (
 	<div class="bg-info create-account">
 		<div class="close">
-			<ButtonClose href={HOME} variant="light" />
+			<ButtonClose to={HOME} variant="light" />
 		</div>
 		<div class="container">
 			<main class=" flex-space">
