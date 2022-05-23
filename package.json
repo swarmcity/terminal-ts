@@ -15,6 +15,7 @@
 		"classnames": "^2.3.1",
 		"ethers": "^5.5.2",
 		"preact": "^10.5.15",
+		"qrcode.react": "^3.0.2",
 		"react-easy-crop": "^4.2.0",
 		"teaful": "^0.10.0",
 		"wagmi": "^0.1.3"

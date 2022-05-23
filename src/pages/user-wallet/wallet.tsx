@@ -1,4 +1,5 @@
 import { useState } from 'preact/hooks'
+import { Link } from '@reach/router'
 
 // Components
 import { ButtonClose } from '../../components/ButtonClose'
@@ -30,9 +31,9 @@ const Menu = ({ setView }: ChangeView) => (
 		<a onClick={() => setView(View.Send)} class="btn btn-info">
 			send DAI
 		</a>
-		<a onClick={() => setView(View.Receive)} class="btn btn-info">
+		<Link to="/account-public-wallet" className="btn btn-info">
 			receive
-		</a>
+		</Link>
 	</div>
 )
 
