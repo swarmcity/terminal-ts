@@ -4,6 +4,7 @@ import { QRCodeSVG } from 'qrcode.react'
 
 // Components
 import { ButtonClose } from '../../components/ButtonClose'
+import { PasswordModal } from '../modals/password/password'
 
 // Store and routes
 import { useStore } from '../../store'
@@ -16,19 +17,30 @@ type AccountPublicWalletProps = RouteComponentProps
 
 export const AccountPublicWallet = (_: AccountPublicWalletProps) => {
 	const [showQR, setShowQR] = useState(false)
+	const [showPassword, setShowPassword] = useState(false)
+	const [privateKey, setPrivateKey] = useState<string>()
 	const [profile] = useStore.profile()
 
 	if (!profile || !profile.address) {
 		return <Redirect path={LOGIN} />
 	}
 
-	const copyAddress = () => {
+	const copyText = (text: string) => {
 		// TODO: Add some visual effect to show that this worked
-		navigator.clipboard.writeText(profile?.address ?? '')
+		navigator.clipboard.writeText(text)
 	}
 
 	return (
 		<div class="bg-gray-lt keys">
+			<PasswordModal
+				show={showPassword}
+				onClose={() => setShowPassword(false)}
+				onSuccess={(wallet) => {
+					setPrivateKey(wallet.privateKey)
+					setShowPassword(false)
+				}}
+			/>
+
 			<div class="close">
 				<ButtonClose href={ACCOUNT_WALLET} variant="dark" />
 			</div>
@@ -41,7 +53,7 @@ export const AccountPublicWallet = (_: AccountPublicWalletProps) => {
 						<a
 							class="link"
 							style={{ cursor: 'pointer' }}
-							onClick={() => copyAddress()}
+							onClick={() => copyText(profile?.address ?? '')}
 						>
 							copy address
 						</a>
@@ -67,11 +79,37 @@ export const AccountPublicWallet = (_: AccountPublicWalletProps) => {
 						needed to steal your funds.
 					</p>
 				</div>
-				{/* TODO: We need the password modal for this */}
 				<div class="container">
-					<div class="btns">
-						<button class="btn btn-light">show private key</button>
-					</div>
+					{privateKey ? (
+						<>
+							<p class="key key-private key-shown">{privateKey}</p>
+							<div class="links">
+								<a
+									class="link"
+									style={{ cursor: 'pointer' }}
+									onClick={() => copyText(privateKey)}
+								>
+									copy private key
+								</a>
+								<a
+									class="link"
+									style={{ cursor: 'pointer' }}
+									onClick={() => setPrivateKey('')}
+								>
+									hide private key
+								</a>
+							</div>
+						</>
+					) : (
+						<div class="btns">
+							<button
+								class="btn btn-light"
+								onClick={() => setShowPassword(true)}
+							>
+								show private key
+							</button>
+						</div>
+					)}
 				</div>
 			</main>
 		</div>
