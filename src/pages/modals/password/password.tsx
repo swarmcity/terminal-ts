@@ -33,6 +33,10 @@ export const PasswordModal = ({
 	const [password, setPassword] = useState('')
 	const [profile] = useStore.profile()
 
+	if (!show) {
+		return null
+	}
+
 	// TODO: Show error message somewhere
 	if (!profile?.encryptedWallet) {
 		console.error('No encryptedWallet')
@@ -62,11 +66,11 @@ export const PasswordModal = ({
 
 	return (
 		<div
-			class={cn(classes.passwordModal, 'modal', 'show')}
+			class={cn(classes.passwordModal, 'modal')}
 			tabIndex={-1}
 			aria-labelledby="pwModalLabel"
-			aria-hidden={show ? 'false' : 'true'}
-			style={{ display: show ? 'block' : 'none' }}
+			aria-hidden="false"
+			style={{ display: 'block' }}
 		>
 			<div class="modal-dialog modal-fullscreen">
 				<div class="modal-content">

@@ -1,5 +1,6 @@
 import { useState } from 'preact/hooks'
 import { Link, Redirect } from '@reach/router'
+import { useBalance } from 'wagmi'
 
 // Components
 import { ButtonClose } from '../../components/ButtonClose'
@@ -69,9 +70,10 @@ export const AccountWallet = (_: RouteComponentProps) => {
 	const [profile] = useStore.profile()
 	const [view, setView] = useState<View>(View.Menu)
 	const ViewComponent = VIEWS[view]
+	const { data: balance } = useBalance()
 
 	if (!profile) {
-		return <Redirect path={LOGIN} />
+		return <Redirect to={LOGIN} noThrow />
 	}
 
 	return (
@@ -82,7 +84,16 @@ export const AccountWallet = (_: RouteComponentProps) => {
 			<div class="container">
 				<div class="flex-space">
 					<div class="wallet-balance">
-						44 DAI <span class="usd"> ≈ 44 USD</span>
+						{balance ? (
+							<>
+								{balance.formatted} {balance.symbol}{' '}
+								<span class="usd"> ≈ {balance.formatted} USD</span>
+							</>
+						) : (
+							<>
+								0.0 xDAI <span class="usd"> ≈ 0.0 USD</span>
+							</>
+						)}
 					</div>
 					<div>
 						<Link to={ACCOUNT_PUBLIC_WALLET} className="link link-dark">

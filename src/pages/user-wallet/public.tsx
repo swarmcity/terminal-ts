@@ -22,7 +22,7 @@ export const AccountPublicWallet = (_: AccountPublicWalletProps) => {
 	const [profile] = useStore.profile()
 
 	if (!profile || !profile.address) {
-		return <Redirect path={LOGIN} />
+		return <Redirect path={LOGIN} noThrow />
 	}
 
 	const copyText = (text: string) => {
