@@ -2,7 +2,7 @@ import type { Chain } from 'wagmi'
 import type { Networkish } from '@ethersproject/networks'
 
 const BLOCK_EXPLORER = {
-	name: 'BlockScount',
+	name: 'BlockScout',
 	url: 'https://blockscout.com/xdai/mainnet/',
 }
 
