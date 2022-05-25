@@ -103,7 +103,8 @@ export class EthersConnector extends Connector<
 	}
 
 	async getSigner() {
-		return await this.options.getSigner()
+		const wallet = await this.options.getSigner()
+		return wallet.connect(await this.getProvider())
 	}
 
 	async isAuthorized() {

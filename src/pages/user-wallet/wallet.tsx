@@ -1,6 +1,8 @@
 import { useState } from 'preact/hooks'
 import { Link, Redirect } from '@reach/router'
-import { useBalance } from 'wagmi'
+import { useBalance, useSendTransaction } from 'wagmi'
+import { getAddress } from '@ethersproject/address'
+import { parseEther } from '@ethersproject/units'
 
 // Components
 import { ButtonClose } from '../../components/ButtonClose'
@@ -38,25 +40,76 @@ const Menu = ({ setView }: ChangeView) => (
 	</div>
 )
 
-const Send = ({ setView }: ChangeView) => (
-	<div class="flex-space user-wallet-send">
-		<form class="send">
-			<div class="input-group">
-				<input type="text" id="amt-send" />
-				<label for="amt-send">Amount to send</label>
-			</div>
-			<input type="text" id="rec-address" placeholder="Receiver's address" />
-			<div class="btns btn-icons">
-				<a class="close" onClick={() => setView(View.Menu)}>
-					<img src={cancelButton} />
-				</a>
-				<a class="btn-icon">
-					<img src={sendButton} />
-				</a>
-			</div>
-		</form>
-	</div>
-)
+const formatRequest = ({
+	address,
+	amount,
+}: {
+	address: string
+	amount: string
+}) => {
+	let to, value
+	let isValid = true
+
+	try {
+		to = getAddress(address)
+		value = parseEther(amount)
+	} catch (_) {
+		isValid = false
+	}
+
+	return { to, value, isValid }
+}
+
+const Send = ({ setView }: ChangeView) => {
+	const [amount, setAmount] = useState('0')
+	const [address, setAddress] = useState('')
+	const { to, value, isValid } = formatRequest({ amount, address })
+
+	const { isLoading, isError, error, sendTransaction } = useSendTransaction({
+		request: { to, value },
+		onSuccess: () => setView(View.Menu),
+	})
+
+	const submit = () => {
+		if (isValid) {
+			sendTransaction()
+		}
+	}
+
+	return (
+		<div class="flex-space user-wallet-send">
+			<form class="send" onSubmit={submit}>
+				<div class="input-group">
+					<input
+						type="number"
+						min={0}
+						onChange={(event) => setAmount(event.currentTarget.value)}
+					/>
+					<label for="amt-send">Amount to send</label>
+				</div>
+				<input
+					type="text"
+					placeholder="Receiver's address"
+					onChange={(event) => setAddress(event.currentTarget.value)}
+				/>
+
+				{/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+				{isError && (error as any).reason}
+				{isLoading && 'Loading...'}
+				{!isValid && 'Form invalid'}
+
+				<div class="btns btn-icons">
+					<a class="close" onClick={() => setView(View.Menu)}>
+						<img src={cancelButton} />
+					</a>
+					<a role="button" type="submit" class="btn-icon" onClick={submit}>
+						<img src={sendButton} />
+					</a>
+				</div>
+			</form>
+		</div>
+	)
+}
 
 const Receive = () => null
 

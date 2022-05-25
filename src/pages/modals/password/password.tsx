@@ -1,4 +1,4 @@
-import { useState } from 'preact/hooks'
+import { useEffect, useState } from 'preact/hooks'
 import cn from 'classnames'
 import { Wallet } from 'ethers'
 
@@ -32,6 +32,12 @@ export const PasswordModal = ({
 	const [loading, setLoading] = useState(false)
 	const [password, setPassword] = useState('')
 	const [profile] = useStore.profile()
+
+	useEffect(() => {
+		if (!show) {
+			setPassword('')
+		}
+	}, [show])
 
 	if (!show) {
 		return null
@@ -86,6 +92,7 @@ export const PasswordModal = ({
 											type="password"
 											placeholder="password?"
 											value={password}
+											disabled={loading}
 											onChange={(event) =>
 												setPassword(event.currentTarget.value)
 											}

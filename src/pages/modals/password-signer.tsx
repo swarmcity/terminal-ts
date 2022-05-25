@@ -24,7 +24,9 @@ const PasswordSignerInner = (
 	useImperativeHandle(ref, () => ({
 		getSigner: async () => {
 			setShowPassword(true)
-			return defer().promise
+			const wallet = await defer().promise
+			setShowPassword(false)
+			return wallet
 		},
 	}))
 
