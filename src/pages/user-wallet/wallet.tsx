@@ -100,7 +100,7 @@ const Send = ({ setView }: ChangeView) => {
 				{/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
 				{isError && (error as any).reason}
 				{isLoading && 'Loading...'}
-				{!isValid && 'Form invalid'}
+				{!isValid && amount && address && 'Form invalid'}
 
 				<div class="btns btn-icons">
 					<a class="close" onClick={() => setView(View.Menu)}>
