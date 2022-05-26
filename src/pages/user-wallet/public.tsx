@@ -5,6 +5,7 @@ import { QRCodeSVG } from 'qrcode.react'
 // Components
 import { ButtonClose } from '../../components/ButtonClose'
 import { PasswordModal } from '../modals/password/password'
+import { CopyLink } from '../../components/copy-link/copy-link'
 
 // Store and routes
 import { useStore } from '../../store'
@@ -23,11 +24,6 @@ export const AccountPublicWallet = (_: AccountPublicWalletProps) => {
 
 	if (!profile || !profile.address) {
 		return <Redirect path={LOGIN} noThrow />
-	}
-
-	const copyText = (text: string) => {
-		// TODO: Add some visual effect to show that this worked
-		navigator.clipboard.writeText(text)
 	}
 
 	return (
@@ -50,13 +46,9 @@ export const AccountPublicWallet = (_: AccountPublicWalletProps) => {
 					<p>Your address:</p>
 					<p class="key key-public">{profile.address}</p>
 					<div class="links">
-						<a
-							class="link"
-							style={{ cursor: 'pointer' }}
-							onClick={() => copyText(profile?.address ?? '')}
-						>
+						<CopyLink text={profile?.address ?? ''} class="link">
 							copy address
-						</a>
+						</CopyLink>
 						<a
 							class="link"
 							style={{ cursor: 'pointer' }}
@@ -84,13 +76,9 @@ export const AccountPublicWallet = (_: AccountPublicWalletProps) => {
 						<>
 							<p class="key key-private key-shown">{privateKey}</p>
 							<div class="links">
-								<a
-									class="link"
-									style={{ cursor: 'pointer' }}
-									onClick={() => copyText(privateKey)}
-								>
+								<CopyLink text={privateKey} class="link">
 									copy private key
-								</a>
+								</CopyLink>
 								<a
 									class="link"
 									style={{ cursor: 'pointer' }}
