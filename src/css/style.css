@@ -8120,7 +8120,8 @@ body #app form input {
 	margin: auto;
 	transition: border 0.5s;
 }
-body #app form input:focus {
+body #app form input:focus,
+body #app form input:valid {
 	border-bottom-color: #24b1ff;
 	border-bottom-width: 2px;
 	transition: border 0.5s;
@@ -8609,7 +8610,9 @@ body #app .user-wallet-send form .input-group label {
 	transition: font-size 0.5s, font-weight 0.5s, color 0.5s, bottom 0.5s;
 }
 body #app .user-wallet form .input-group input:focus + label,
-body #app .user-wallet-send form .input-group input:focus + label {
+body #app .user-wallet-send form .input-group input:focus + label,
+body #app .user-wallet form .input-group input:valid + label,
+body #app .user-wallet-send form .input-group input:valid + label {
 	bottom: 46px;
 	color: #24b1ff;
 	font-size: 10px;

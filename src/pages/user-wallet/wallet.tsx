@@ -85,6 +85,7 @@ const Send = ({ setView }: ChangeView) => {
 						type="number"
 						min={0}
 						onChange={(event) => setAmount(event.currentTarget.value)}
+						required
 					/>
 					<label for="amt-send">Amount to send</label>
 				</div>
@@ -93,6 +94,7 @@ const Send = ({ setView }: ChangeView) => {
 						id="rec-address"
 						type="text"
 						onChange={(event) => setAddress(event.currentTarget.value)}
+						required
 					/>
 					<label for="rec-address">Receiver's address</label>
 				</div>
@@ -103,7 +105,11 @@ const Send = ({ setView }: ChangeView) => {
 				{!isValid && amount && address && 'Form invalid'}
 
 				<div class="btns btn-icons">
-					<a class="close" onClick={() => setView(View.Menu)}>
+					<a
+						class="close"
+						style={{ cursor: 'pointer' }}
+						onClick={() => setView(View.Menu)}
+					>
 						<img src={cancelButton} />
 					</a>
 					<a role="button" type="submit" class="btn-icon" onClick={submit}>
