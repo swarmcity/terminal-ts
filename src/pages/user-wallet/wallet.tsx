@@ -81,17 +81,21 @@ const Send = ({ setView }: ChangeView) => {
 			<form class="send" onSubmit={submit}>
 				<div class="input-group">
 					<input
+						id="amt-send"
 						type="number"
 						min={0}
 						onChange={(event) => setAmount(event.currentTarget.value)}
 					/>
 					<label for="amt-send">Amount to send</label>
 				</div>
-				<input
-					type="text"
-					placeholder="Receiver's address"
-					onChange={(event) => setAddress(event.currentTarget.value)}
-				/>
+				<div class="input-group">
+					<input
+						id="rec-address"
+						type="text"
+						onChange={(event) => setAddress(event.currentTarget.value)}
+					/>
+					<label for="rec-address">Receiver's address</label>
+				</div>
 
 				{/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
 				{isError && (error as any).reason}
