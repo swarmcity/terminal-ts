@@ -1,28 +1,24 @@
 import { JSXInternal } from 'preact/src/jsx'
 import caretNext from '../assets/imgs/caretNext.svg?url'
 
-interface Props extends JSXInternal.HTMLAttributes<HTMLAnchorElement> {
-	direction?: 'left' | 'right' | 'up' | 'down'
+const directions = {
+	right: 0,
+	down: 90,
+	left: 180,
+	up: 270,
 }
 
-export function ButtonRoundArrow({ disabled, direction, ...other }: Props) {
-	let rotation = 0
+interface ButtonRoundArrowProps
+	extends JSXInternal.HTMLAttributes<HTMLAnchorElement> {
+	direction?: keyof typeof directions
+}
 
-	switch (direction) {
-		case 'left':
-			rotation = 180
-			break
-		case 'up':
-			rotation = 270
-			break
-		case 'down':
-			rotation = 90
-			break
-		default:
-			rotation = 0
-			break
-	}
-
+export function ButtonRoundArrow({
+	disabled,
+	direction,
+	...other
+}: ButtonRoundArrowProps) {
+	const rotation = directions[direction || 'right']
 	const img = (
 		<img src={caretNext} style={{ transform: `rotate(${rotation}deg)` }} />
 	)
