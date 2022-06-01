@@ -19,7 +19,6 @@ import {
 } from '../../routes'
 
 // Assets
-import cancelButton from '../../assets/imgs/cancel.svg'
 import sendButton from '../../assets/imgs/caretNext.svg'
 
 // Types
@@ -99,9 +98,7 @@ const Send = (_: RouteComponentProps) => {
 				{!isValid && amount && address && 'Form invalid'}
 
 				<div class="btns btn-icons">
-					<Link to={ACCOUNT_WALLET} className="close">
-						<img src={cancelButton} />
-					</Link>
+					<ButtonClose to={ACCOUNT_WALLET} className="close" />
 					<ButtonRoundArrow type="submit" className="btn-icon" onClick={submit}>
 						<img src={sendButton} />
 					</ButtonRoundArrow>
