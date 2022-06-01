@@ -1,4 +1,4 @@
-import { useBalance } from 'wagmi'
+import { useAccount, useBalance, useNetwork } from 'wagmi'
 import { Link, Redirect } from '@reach/router'
 
 // Routes and store
@@ -19,10 +19,16 @@ type Props = RouteComponentProps
 
 export const Account = (_: Props) => {
 	const [profile, setProfile] = useStore.profile()
-	const { data: balance } = useBalance()
+
+	const { activeChain } = useNetwork()
+	const symbol = activeChain?.nativeCurrency?.symbol
+
+	const { data: account } = useAccount()
+	const { data: balance } = useBalance({ addressOrName: account?.address })
+
 	const formattedBalance = balance
 		? `${balance.formatted} ${balance.symbol}`
-		: '0 xDAI'
+		: `0 ${symbol}`
 
 	if (!profile?.address) {
 		return <Redirect to={LOGIN} noThrow />
