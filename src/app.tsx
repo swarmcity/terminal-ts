@@ -16,7 +16,7 @@ import { AccountWallet } from './pages/user-wallet/wallet'
 import { AccountPublicWallet } from './pages/user-wallet/public'
 
 // Components
-import { PasswordSigner } from './pages/modals/password-signer'
+import { PasswordSigner } from './components/modals/password-signer'
 
 // Routes, store and config
 import * as ROUTES from './routes'
@@ -28,7 +28,7 @@ import { EthersConnector } from './lib/ethers-injector'
 import { AccountManager } from './lib/account-manager'
 
 // Types
-import type { PasswordSignerRef } from './pages/modals/password-signer'
+import type { PasswordSignerRef } from './components/modals/password-signer'
 import type { Ref } from 'preact/hooks'
 
 const accountManager = new AccountManager()

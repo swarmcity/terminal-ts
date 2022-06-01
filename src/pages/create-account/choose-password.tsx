@@ -3,7 +3,7 @@ import warningBlue from '../../assets/imgs/warningBlue.svg?url'
 import { ACCOUNT_CREATED } from '../../routes'
 import { navigate, RouteComponentProps } from '@reach/router'
 import { Wallet } from 'ethers'
-import { UserCreateStop } from '../modals/user-create-stop'
+import { UserCreateStop } from '../../components/modals/user-create-stop'
 import { ButtonRoundArrow } from '../../components/ButtonRoundArrow'
 import { useStore } from '../../store'
 

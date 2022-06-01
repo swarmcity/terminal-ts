@@ -4,7 +4,7 @@ import { QRCodeSVG } from 'qrcode.react'
 
 // Components
 import { ButtonClose } from '../../components/ButtonClose'
-import { PasswordModal } from '../modals/password/password'
+import { PasswordModal } from '../../components/modals/password/password'
 import { CopyLink } from '../../components/copy-link/copy-link'
 
 // Store and routes

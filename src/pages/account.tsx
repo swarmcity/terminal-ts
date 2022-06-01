@@ -3,7 +3,7 @@ import exit from '../assets/imgs/exit.svg?url'
 import { HOME } from '../routes'
 import { useStore } from '../store'
 import { RouteComponentProps } from '@reach/router'
-import { CreateAvatar } from './modals/create-avatar'
+import { CreateAvatar } from '../components/modals/create-avatar'
 
 type Props = RouteComponentProps
 

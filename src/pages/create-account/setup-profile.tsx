@@ -3,9 +3,9 @@ import avatarDefault from '../../assets/imgs/avatar.svg?url'
 import arrowUp from '../../assets/imgs/arrowUp.svg?url'
 import { ACCOUNT_PASSWORD } from '../../routes'
 import { ButtonRoundArrow } from '../../components/ButtonRoundArrow'
-import { UserCreateStop } from '../modals/user-create-stop'
+import { UserCreateStop } from '../../components/modals/user-create-stop'
 import { RouteComponentProps } from '@reach/router'
-import { CreateAvatar } from '../modals/create-avatar'
+import { CreateAvatar } from '../../components/modals/create-avatar'
 
 type Props = RouteComponentProps
 

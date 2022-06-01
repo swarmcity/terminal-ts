@@ -5,7 +5,7 @@ import cancel from '../../assets/imgs/cancel.svg?url'
 import checkMarkBlue from '../../assets/imgs/checkMarkBlue.svg?url'
 import iconRotate from '../../assets/imgs/iconRotate.svg?url'
 import { blobToDataURL } from '../../lib/canvas'
-import { Cropper, CropperRef } from '../../components/cropper'
+import { Cropper, CropperRef } from '../cropper'
 import { JSXInternal } from 'preact/src/jsx'
 
 interface Props {

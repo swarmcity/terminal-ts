@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'preact/hooks'
 import { RouteComponentProps } from '@reach/router'
-import { UserCreateStop } from '../modals/user-create-stop'
+import { UserCreateStop } from '../../components/modals/user-create-stop'
 import warningBlue from '../../assets/imgs/warningBlue.svg?url'
 import { useStore } from '../../store'
 import { ButtonRoundArrow } from '../../components/ButtonRoundArrow'

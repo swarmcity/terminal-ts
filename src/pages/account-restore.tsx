@@ -9,7 +9,7 @@ import cancel from '../assets/imgs/cancel.svg?url'
 
 import { useStore } from '../store'
 import { ACCOUNT } from '../routes'
-import { UserCreateStop } from './modals/user-create-stop'
+import { UserCreateStop } from '../components/modals/user-create-stop'
 import type { Profile } from '../types/profile'
 
 type Props = RouteComponentProps

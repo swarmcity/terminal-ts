@@ -1,5 +1,5 @@
 import { useState } from 'preact/hooks'
-import { ButtonClose } from '../../components/ButtonClose'
+import { ButtonClose } from '../ButtonClose'
 import checkMarkRed from '../../assets/imgs/checkMarkRed.svg?url'
 import { LOGIN } from '../../routes'
 
