@@ -20,7 +20,6 @@ export const WAGMI_CHAIN: Chain = {
 		default: 'https://rpc.ankr.com/gnosis',
 	},
 	blockExplorers: {
-		etherscan: BLOCK_EXPLORER,
 		default: BLOCK_EXPLORER,
 	},
 }
