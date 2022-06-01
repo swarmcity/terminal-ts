@@ -2,7 +2,7 @@ import { useState } from 'preact/hooks'
 import { Link } from '@reach/router'
 
 // Components
-import { ButtonClose } from '../../components/ButtonClose'
+import { ButtonClose } from '../ButtonClose'
 
 // Assets
 import checkMarkRed from '../../assets/imgs/checkMarkRed.svg?url'

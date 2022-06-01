@@ -1,12 +1,19 @@
 // Assets
+import cancel from '../assets/imgs/cancel.svg?url'
 import close from '../assets/imgs/close.svg?url'
 import closeWhite from '../assets/imgs/closeWhite.svg?url'
 
 // Components
 import { FlexLink, FlexLinkProps } from './FlexLink'
 
+const VARIANTS = {
+	light: closeWhite,
+	default: cancel,
+	dark: close,
+}
+
 interface ButtonCloseProps<TState> extends FlexLinkProps<TState> {
-	variant?: 'light' | 'dark'
+	variant?: keyof typeof VARIANTS
 }
 
 export function ButtonClose<TState>({
@@ -15,7 +22,7 @@ export function ButtonClose<TState>({
 }: ButtonCloseProps<TState>) {
 	return (
 		<FlexLink role="button" {...other}>
-			<img src={variant === 'light' ? closeWhite : close} />
+			<img src={VARIANTS[variant || 'default']} />
 		</FlexLink>
 	)
 }

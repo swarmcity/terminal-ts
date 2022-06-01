@@ -6,7 +6,7 @@ import { useStore } from '../../store'
 import { ACCOUNT_BACKUP } from '../../routes'
 
 // Components
-import { UserCreateStop } from '../modals/user-create-stop'
+import { UserCreateStop } from '../../components/modals/user-create-stop'
 
 // Assets
 import avatarDefault from '../../assets/imgs/avatar.svg?url'

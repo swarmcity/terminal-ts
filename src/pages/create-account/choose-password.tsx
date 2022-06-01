@@ -3,9 +3,10 @@ import warningBlue from '../../assets/imgs/warningBlue.svg?url'
 import { ACCOUNT_CREATED } from '../../routes'
 import { navigate, RouteComponentProps } from '@reach/router'
 import { Wallet } from 'ethers'
-import { UserCreateStop } from '../modals/user-create-stop'
+import { UserCreateStop } from '../../components/modals/user-create-stop'
 import { ButtonRoundArrow } from '../../components/ButtonRoundArrow'
 import { useStore } from '../../store'
+import { Input } from '../../components/input/input'
 
 type Props = RouteComponentProps
 
@@ -66,18 +67,20 @@ export const ChoosePassword = (_: Props) => {
 						<h1>Choose a password.</h1>
 					</header>
 					<form>
-						<input
-							type="password"
+						<Input
 							id="password"
-							placeholder="password"
-							onChange={(e) => setPassword(e.currentTarget.value)}
-						/>
-						<input
 							type="password"
+							onChange={(e) => setPassword(e.currentTarget.value)}
+						>
+							password
+						</Input>
+						<Input
 							id="passwordConfirm"
-							placeholder="confirm password"
+							type="password"
 							onChange={(e) => setPassword2(e.currentTarget.value)}
-						/>
+						>
+							confirm password
+						</Input>
 					</form>
 					<div style={{ height: '100px', width: '100%' }}>
 						{loading && <p>Encrypting...</p>}

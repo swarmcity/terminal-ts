@@ -1,11 +1,12 @@
-import { Link } from '@reach/router'
+import { useBalance } from 'wagmi'
+import { Link, Redirect } from '@reach/router'
 
-// Store and routes
+// Routes and store
+import { ACCOUNT_WALLET, LOGIN } from '../routes'
 import { useStore } from '../store'
-import { HOME } from '../routes'
 
 // Components
-import { CreateAvatar } from './modals/create-avatar'
+import { CreateAvatar } from '../components/modals/create-avatar'
 
 // Assets
 import avatarDefault from '../assets/imgs/avatar.svg?url'
@@ -17,14 +18,22 @@ import type { RouteComponentProps } from '@reach/router'
 type Props = RouteComponentProps
 
 export const Account = (_: Props) => {
-	const [profile] = useStore.profile()
+	const [profile, setProfile] = useStore.profile()
+	const { data: balance } = useBalance()
+	const formattedBalance = balance
+		? `${balance.formatted} ${balance.symbol}`
+		: '0 xDAI'
+
+	if (!profile?.address) {
+		return <Redirect to={LOGIN} noThrow />
+	}
 
 	return (
 		<div class="bg-gray-lt account-wallet">
 			<div class="icon-exit">
-				<Link to={HOME}>
+				<a style={{ cursor: 'pointer' }} onClick={() => setProfile()}>
 					<img src={exit} />
-				</Link>
+				</a>
 			</div>
 			<div class="container">
 				<main class="flex-space">
@@ -39,9 +48,9 @@ export const Account = (_: Props) => {
 								{profile?.username}
 							</a>
 							<div>
-								<a href="#" class="wallet-balance">
-									0 DAI
-								</a>
+								<Link to={ACCOUNT_WALLET} className="wallet-balance">
+									{formattedBalance}
+								</Link>
 							</div>
 						</figcaption>
 					</figure>

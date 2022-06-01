@@ -6,9 +6,12 @@ import avatarDefault from '../assets/imgs/avatar.svg?url'
 import checkMarkBlue from '../assets/imgs/checkMarkBlue.svg?url'
 import cancel from '../assets/imgs/cancel.svg?url'
 
+// Store and routes
 import { useStore } from '../store'
 import { ACCOUNT } from '../routes'
-import { UserCreateStop } from './modals/user-create-stop'
+
+// Components
+import { UserCreateStop } from '../components/modals/user-create-stop'
 
 // Types
 import type { JSXInternal } from 'preact/src/jsx'

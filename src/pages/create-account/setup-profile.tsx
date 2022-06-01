@@ -8,8 +8,8 @@ import arrowUp from '../../assets/imgs/arrowUp.svg?url'
 
 // Components
 import { ButtonRoundArrow } from '../../components/ButtonRoundArrow'
-import { UserCreateStop } from '../modals/user-create-stop'
-import { CreateAvatar } from '../modals/create-avatar'
+import { UserCreateStop } from '../../components/modals/user-create-stop'
+import { CreateAvatar } from '../../components/modals/create-avatar'
 
 // Types
 import type { RouteComponentProps } from '@reach/router'
