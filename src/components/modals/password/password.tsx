@@ -102,9 +102,8 @@ export const PasswordModal = ({
 								<div class="btns btn-icons">
 									<ButtonClose
 										variant="dark"
-										class="btn-img close"
+										className="btn-img close"
 										onClick={onClose}
-										disabled={loading}
 									/>
 									<ButtonRoundArrow onClick={decrypt} disabled={loading} />
 								</div>

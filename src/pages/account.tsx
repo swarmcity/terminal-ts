@@ -1,5 +1,5 @@
 import { useBalance } from 'wagmi'
-import { Link, Redirect, RouteComponentProps } from '@reach/router'
+import { Link, Redirect } from '@reach/router'
 
 // Routes and store
 import { ACCOUNT_WALLET, LOGIN } from '../routes'
@@ -11,6 +11,9 @@ import { CreateAvatar } from '../components/modals/create-avatar'
 // Assets
 import avatarDefault from '../assets/imgs/avatar.svg?url'
 import exit from '../assets/imgs/exit.svg?url'
+
+// Types
+import type { RouteComponentProps } from '@reach/router'
 
 type Props = RouteComponentProps
 

@@ -1,10 +1,19 @@
 import { useCallback, useEffect, useMemo, useState } from 'preact/hooks'
-import { RouteComponentProps } from '@reach/router'
+import { Link } from '@reach/router'
+
+// Components
 import { UserCreateStop } from '../../components/modals/user-create-stop'
-import warningBlue from '../../assets/imgs/warningBlue.svg?url'
-import { useStore } from '../../store'
 import { ButtonRoundArrow } from '../../components/ButtonRoundArrow'
+
+// Assets
+import warningBlue from '../../assets/imgs/warningBlue.svg?url'
+
+// Store and routes
 import { ACCOUNT } from '../../routes'
+import { useStore } from '../../store'
+
+// Types
+import type { RouteComponentProps } from '@reach/router'
 
 type Props = RouteComponentProps
 
@@ -87,9 +96,9 @@ export const Backup = (_: Props) => {
 						</a>
 					</div>
 					<div class="btns">
-						<a class="btn btn-light" href={ACCOUNT}>
+						<Link className="btn btn-light" to={ACCOUNT}>
 							enter swarm.city
-						</a>
+						</Link>
 					</div>
 				</main>
 			</div>

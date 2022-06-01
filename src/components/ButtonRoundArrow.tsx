@@ -1,28 +1,27 @@
-import { JSXInternal } from 'preact/src/jsx'
+// Assets
 import caretNext from '../assets/imgs/caretNext.svg?url'
 
-interface Props extends JSXInternal.HTMLAttributes<HTMLAnchorElement> {
-	direction?: 'left' | 'right' | 'up' | 'down'
+// Components
+import { FlexLink, FlexLinkProps } from './FlexLink'
+
+const directions = {
+	right: 0,
+	down: 90,
+	left: 180,
+	up: 270,
 }
 
-export function ButtonRoundArrow({ disabled, direction, ...other }: Props) {
-	let rotation = 0
+interface ButtonRoundArrowProps<TState> extends FlexLinkProps<TState> {
+	disabled?: boolean
+	direction?: keyof typeof directions
+}
 
-	switch (direction) {
-		case 'left':
-			rotation = 180
-			break
-		case 'up':
-			rotation = 270
-			break
-		case 'down':
-			rotation = 90
-			break
-		default:
-			rotation = 0
-			break
-	}
-
+export function ButtonRoundArrow<TState>({
+	disabled,
+	direction,
+	...other
+}: ButtonRoundArrowProps<TState>) {
+	const rotation = directions[direction || 'right']
 	const img = (
 		<img src={caretNext} style={{ transform: `rotate(${rotation}deg)` }} />
 	)
@@ -35,8 +34,8 @@ export function ButtonRoundArrow({ disabled, direction, ...other }: Props) {
 		)
 
 	return (
-		<a role="button" class={'btn-icon'} {...other}>
+		<FlexLink role="button" className={'btn-icon'} {...other}>
 			{img}
-		</a>
+		</FlexLink>
 	)
 }
