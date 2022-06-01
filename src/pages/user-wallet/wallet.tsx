@@ -24,6 +24,7 @@ import sendButton from '../../assets/imgs/caretNext.svg'
 
 // Types
 import type { RouteComponentProps } from '@reach/router'
+import { ButtonRoundArrow } from '../../components/ButtonRoundArrow'
 
 const Menu = (_: RouteComponentProps) => (
 	<div class="flex-space">
@@ -101,9 +102,9 @@ const Send = (_: RouteComponentProps) => {
 					<Link to={ACCOUNT_WALLET} className="close">
 						<img src={cancelButton} />
 					</Link>
-					<a role="button" type="submit" class="btn-icon" onClick={submit}>
+					<ButtonRoundArrow type="submit" className="btn-icon" onClick={submit}>
 						<img src={sendButton} />
-					</a>
+					</ButtonRoundArrow>
 				</div>
 			</form>
 		</div>
