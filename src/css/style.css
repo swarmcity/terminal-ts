@@ -8593,36 +8593,6 @@ body #app .user-wallet .link,
 body #app .user-wallet-send .link {
 	margin-top: 21px;
 }
-body #app .user-wallet form .input-group,
-body #app .user-wallet-send form .input-group {
-	display: flex;
-	flex-direction: column-reverse;
-	position: relative;
-}
-body #app .user-wallet form .input-group label,
-body #app .user-wallet-send form .input-group label {
-	color: #262626;
-	position: absolute;
-	bottom: 10px;
-	left: 0;
-	font-weight: 400;
-	font-size: 14px;
-	transition: font-size 0.5s, font-weight 0.5s, color 0.5s, bottom 0.5s;
-}
-body #app .user-wallet form .input-group input:focus + label,
-body #app .user-wallet-send form .input-group input:focus + label,
-body #app .user-wallet form .input-group input:valid + label,
-body #app .user-wallet-send form .input-group input:valid + label {
-	bottom: 46px;
-	color: #24b1ff;
-	font-size: 10px;
-	font-weight: 700;
-	color: #666666;
-	transition: font-size 0.5s, font-weight 0.5s, color 0.5s, bottom 0.5s;
-}
-body #app .user-wallet-send form.send #rec-address {
-	margin-top: 32px;
-}
 body #app .user-wallet-send .btns {
 	margin-top: 180px;
 }

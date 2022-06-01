@@ -18,6 +18,7 @@ import sendButton from '../../assets/imgs/caretNext.svg'
 // Types
 import type { FunctionComponent } from 'preact'
 import type { RouteComponentProps } from '@reach/router'
+import { Input } from '../../components/input/input'
 
 enum View {
 	Menu,
@@ -79,25 +80,22 @@ const Send = ({ setView }: ChangeView) => {
 	return (
 		<div class="flex-space user-wallet-send">
 			<form class="send" onSubmit={submit}>
-				<div class="input-group">
-					<input
-						id="amt-send"
-						type="number"
-						min={0}
-						onChange={(event) => setAmount(event.currentTarget.value)}
-						required
-					/>
-					<label for="amt-send">Amount to send</label>
-				</div>
-				<div class="input-group">
-					<input
-						id="rec-address"
-						type="text"
-						onChange={(event) => setAddress(event.currentTarget.value)}
-						required
-					/>
-					<label for="rec-address">Receiver's address</label>
-				</div>
+				<Input
+					id="amt-send"
+					type="number"
+					min={0}
+					onChange={(event) => setAmount(event.currentTarget.value)}
+				>
+					Amount to send
+				</Input>
+				<Input
+					id="rec-address"
+					type="text"
+					min={0}
+					onChange={(event) => setAddress(event.currentTarget.value)}
+				>
+					Receiver's address
+				</Input>
 
 				{/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
 				{isError && (error as any).reason}
