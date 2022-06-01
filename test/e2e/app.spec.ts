@@ -6,7 +6,7 @@ import path from 'path'
 import { Wallet } from 'ethers'
 
 // Utils
-import { checkFileDownloaded } from '../utils'
+import { checkFileDownloaded, sleep, spaClick } from '../utils'
 
 // Types
 import type { PreviewServer } from 'vite'
@@ -68,6 +68,8 @@ describe('app.tsx', () => {
 	})
 
 	test('should go through the create-account flow', async () => {
+		const btnSelector = 'a[role="button"][class="btn-icon"]'
+
 		await page.goto(PAGES.createAccount)
 
 		// Inputing in the username
@@ -79,21 +81,13 @@ describe('app.tsx', () => {
 		await usernameElement.focus()
 		const username = 'testusername'
 		await page.keyboard.type(username)
-
-		let nextButton = await page.waitForSelector(
-			'a[role="button"][class="btn-icon"]'
-		)
-		await nextButton.click()
+		await spaClick(page, btnSelector)
 
 		// Choose your password page with warning
 		headerElement = await page.waitForSelector('h1')
 		headerText = await headerElement.evaluate((el) => el.textContent)
 		expect(headerText).toBe('Choose a password.')
-
-		nextButton = await page.waitForSelector(
-			'a[role="button"][class="btn-icon"]'
-		)
-		await nextButton.click()
+		await spaClick(page, btnSelector)
 
 		// Choose your password page with two inputs
 		headerElement = await page.waitForSelector('h1')
@@ -110,19 +104,17 @@ describe('app.tsx', () => {
 			await page.keyboard.type(password)
 		}
 
-		nextButton = await page.waitForSelector(
-			'a[role="button"][class="btn-icon"]'
-		)
-		await nextButton.click()
+		await spaClick(page, btnSelector)
 
 		// Wait for encryption to end
-		nextButton = await page.waitForSelector('a[href="/account-backup"]')
+		const nextButton = await page.waitForSelector('a[href="/account-backup"]')
 
 		// Final page
 		headerElement = await page.waitForSelector('h1')
 		headerText = await headerElement.evaluate((el) => el.textContent)
 		expect(headerText).toBe('Great!')
-		await nextButton.click()
+		await spaClick(page, nextButton)
+		await sleep(100)
 
 		// Backup account
 		headerElement = await page.waitForSelector('h1')
@@ -134,10 +126,7 @@ describe('app.tsx', () => {
 			await unlink(walletPath)
 		} catch (_) {}
 
-		nextButton = await page.waitForSelector(
-			'a[role="button"][class="btn-icon"]'
-		)
-		await nextButton.click()
+		await spaClick(page, btnSelector)
 
 		// Check automatic file download
 		headerElement = await page.waitForSelector('h1')

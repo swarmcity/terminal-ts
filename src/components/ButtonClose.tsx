@@ -1,15 +1,21 @@
-import { JSXInternal } from 'preact/src/jsx'
+// Assets
 import close from '../assets/imgs/close.svg?url'
 import closeWhite from '../assets/imgs/closeWhite.svg?url'
 
-interface Props extends JSXInternal.HTMLAttributes<HTMLAnchorElement> {
+// Components
+import { FlexLink, FlexLinkProps } from './FlexLink'
+
+interface ButtonCloseProps<TState> extends FlexLinkProps<TState> {
 	variant?: 'light' | 'dark'
 }
 
-export function ButtonClose({ variant, ...other }: Props) {
+export function ButtonClose<TState>({
+	variant,
+	...other
+}: ButtonCloseProps<TState>) {
 	return (
-		<a role="button" {...other}>
+		<FlexLink role="button" {...other}>
 			<img src={variant === 'light' ? closeWhite : close} />
-		</a>
+		</FlexLink>
 	)
 }

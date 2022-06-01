@@ -1,6 +1,5 @@
-import type { RouteComponentProps } from '@reach/router'
+import { Link } from '@reach/router'
 import { useState } from 'preact/hooks'
-import type { JSXInternal } from 'preact/src/jsx'
 
 // Assets
 import avatarDefault from '../assets/imgs/avatar.svg?url'
@@ -10,7 +9,11 @@ import cancel from '../assets/imgs/cancel.svg?url'
 import { useStore } from '../store'
 import { ACCOUNT } from '../routes'
 import { UserCreateStop } from './modals/user-create-stop'
+
+// Types
+import type { JSXInternal } from 'preact/src/jsx'
 import type { Profile } from '../types/profile'
+import type { RouteComponentProps } from '@reach/router'
 
 type Props = RouteComponentProps
 
@@ -121,9 +124,9 @@ export const AccountRestore = (_: Props) => {
 						<p class="username">{profile?.username}</p>
 					</div>
 					<div class="btns">
-						<a class="btn btn-light" href={ACCOUNT}>
+						<Link className="btn btn-light" to={ACCOUNT}>
 							enter swarm.city
-						</a>
+						</Link>
 					</div>
 				</main>
 			</div>

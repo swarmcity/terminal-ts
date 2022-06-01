@@ -1,12 +1,21 @@
 import { useState } from 'preact/hooks'
+import { Link } from '@reach/router'
+
+// Components
 import { ButtonClose } from '../../components/ButtonClose'
+
+// Assets
 import checkMarkRed from '../../assets/imgs/checkMarkRed.svg?url'
+
+// Routes
 import { LOGIN } from '../../routes'
 
 export const UserCreateStop = () => {
 	const [shown, setShown] = useState<boolean>()
 
-	if (!shown) return <ButtonClose onClick={() => setShown(true)} />
+	if (!shown) {
+		return <ButtonClose onClick={() => setShown(true)} />
+	}
 
 	return (
 		<div
@@ -28,9 +37,9 @@ export const UserCreateStop = () => {
 					</header>
 					<div class="btns">
 						<ButtonClose onClick={() => setShown(false)} />
-						<a class="btn-icon" href={LOGIN}>
+						<Link className="btn-icon" to={LOGIN}>
 							<img src={checkMarkRed} />
-						</a>
+						</Link>
 					</div>
 				</main>
 			</div>
