@@ -1,41 +1,36 @@
 import { useState } from 'preact/hooks'
-import { Link, Redirect } from '@reach/router'
+import { Link, navigate, Redirect, Router } from '@reach/router'
 import { useBalance, useSendTransaction } from 'wagmi'
 import { getAddress } from '@ethersproject/address'
 import { parseEther } from '@ethersproject/units'
 
 // Components
 import { ButtonClose } from '../../components/ButtonClose'
+import { Input } from '../../components/input/input'
 
 // Store and routes
-import { LOGIN, ACCOUNT, ACCOUNT_PUBLIC_WALLET } from '../../routes'
 import { useStore } from '../../store'
+import {
+	LOGIN,
+	ACCOUNT,
+	ACCOUNT_PUBLIC_WALLET,
+	ACCOUNT_WALLET_SEND,
+	ACCOUNT_WALLET,
+} from '../../routes'
 
 // Assets
 import cancelButton from '../../assets/imgs/cancel.svg'
 import sendButton from '../../assets/imgs/caretNext.svg'
 
 // Types
-import type { FunctionComponent } from 'preact'
 import type { RouteComponentProps } from '@reach/router'
-import { Input } from '../../components/input/input'
 
-enum View {
-	Menu,
-	Send,
-	Receive,
-}
-
-type ChangeView = {
-	setView: (view: View) => void
-}
-
-const Menu = ({ setView }: ChangeView) => (
+const Menu = (_: RouteComponentProps) => (
 	<div class="flex-space">
-		<a onClick={() => setView(View.Send)} class="btn btn-info">
+		<Link to={ACCOUNT_WALLET_SEND} className="btn btn-info">
 			send DAI
-		</a>
-		<Link to="/account-public-wallet" className="btn btn-info">
+		</Link>
+		<Link to={ACCOUNT_PUBLIC_WALLET} className="btn btn-info">
 			receive
 		</Link>
 	</div>
@@ -61,14 +56,14 @@ const formatRequest = ({
 	return { to, value, isValid }
 }
 
-const Send = ({ setView }: ChangeView) => {
+const Send = (_: RouteComponentProps) => {
 	const [amount, setAmount] = useState('0')
 	const [address, setAddress] = useState('')
 	const { to, value, isValid } = formatRequest({ amount, address })
 
 	const { isLoading, isError, error, sendTransaction } = useSendTransaction({
 		request: { to, value },
-		onSuccess: () => setView(View.Menu),
+		onSuccess: () => navigate(ACCOUNT_WALLET),
 	})
 
 	const submit = () => {
@@ -103,13 +98,9 @@ const Send = ({ setView }: ChangeView) => {
 				{!isValid && amount && address && 'Form invalid'}
 
 				<div class="btns btn-icons">
-					<a
-						class="close"
-						style={{ cursor: 'pointer' }}
-						onClick={() => setView(View.Menu)}
-					>
+					<Link to={ACCOUNT_WALLET} className="close">
 						<img src={cancelButton} />
-					</a>
+					</Link>
 					<a role="button" type="submit" class="btn-icon" onClick={submit}>
 						<img src={sendButton} />
 					</a>
@@ -119,18 +110,8 @@ const Send = ({ setView }: ChangeView) => {
 	)
 }
 
-const Receive = () => null
-
-const VIEWS: Record<View, FunctionComponent<ChangeView>> = {
-	[View.Menu]: Menu,
-	[View.Send]: Send,
-	[View.Receive]: Receive,
-}
-
 export const AccountWallet = (_: RouteComponentProps) => {
 	const [profile] = useStore.profile()
-	const [view, setView] = useState<View>(View.Menu)
-	const ViewComponent = VIEWS[view]
 	const { data: balance } = useBalance()
 
 	if (!profile?.address) {
@@ -165,7 +146,10 @@ export const AccountWallet = (_: RouteComponentProps) => {
 			</div>
 			<div class="divider short" />
 			<div class="container">
-				<ViewComponent setView={setView} />
+				<Router>
+					<Send path="/send" />
+					<Menu default />
+				</Router>
 			</div>
 		</div>
 	)

@@ -92,7 +92,7 @@ export const App = () => {
 				<Account path={ROUTES.ACCOUNT} />
 				<AccountRestore path={ROUTES.ACCOUNT_RESTORE} />
 				<Home path={ROUTES.HOME} />
-				<AccountWallet path={ROUTES.ACCOUNT_WALLET} />
+				<AccountWallet path={`${ROUTES.ACCOUNT_WALLET}/*`} />
 				<AccountPublicWallet path={ROUTES.ACCOUNT_PUBLIC_WALLET} />
 			</Router>
 		</WagmiConfig>
