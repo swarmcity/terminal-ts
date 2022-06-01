@@ -1,14 +1,25 @@
+import { useBalance } from 'wagmi'
+import { Link, Redirect, RouteComponentProps } from '@reach/router'
+
+// Routes and store
+import { ACCOUNT_WALLET, HOME, LOGIN } from '../routes'
+import { useStore } from '../store'
+
+// Components
+import { CreateAvatar } from '../components/modals/create-avatar'
+
+// Assets
 import avatarDefault from '../assets/imgs/avatar.svg?url'
 import exit from '../assets/imgs/exit.svg?url'
-import { HOME, LOGIN } from '../routes'
-import { useStore } from '../store'
-import { Redirect, RouteComponentProps } from '@reach/router'
-import { CreateAvatar } from '../components/modals/create-avatar'
 
 type Props = RouteComponentProps
 
 export const Account = (_: Props) => {
 	const [profile] = useStore.profile()
+	const { data: balance } = useBalance()
+	const formattedBalance = balance
+		? `${balance.formatted} ${balance.symbol}`
+		: '0 xDAI'
 
 	if (!profile?.address) {
 		return <Redirect to={LOGIN} noThrow />
@@ -34,9 +45,9 @@ export const Account = (_: Props) => {
 								{profile?.username}
 							</a>
 							<div>
-								<a href="account-wallet" class="wallet-balance">
-									0 DAI
-								</a>
+								<Link to={ACCOUNT_WALLET} className="wallet-balance">
+									{formattedBalance}
+								</Link>
 							</div>
 						</figcaption>
 					</figure>
