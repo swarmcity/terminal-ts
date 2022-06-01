@@ -15,7 +15,7 @@ import exit from '../assets/imgs/exit.svg?url'
 type Props = RouteComponentProps
 
 export const Account = (_: Props) => {
-	const [profile] = useStore.profile()
+	const [profile, setProfile] = useStore.profile()
 	const { data: balance } = useBalance()
 	const formattedBalance = balance
 		? `${balance.formatted} ${balance.symbol}`
@@ -28,7 +28,7 @@ export const Account = (_: Props) => {
 	return (
 		<div class="bg-gray-lt account-wallet">
 			<div class="icon-exit">
-				<a href={HOME}>
+				<a style={{ cursor: 'pointer' }} onClick={() => setProfile()}>
 					<img src={exit} />
 				</a>
 			</div>
