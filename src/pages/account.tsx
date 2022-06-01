@@ -2,7 +2,7 @@ import { useBalance } from 'wagmi'
 import { Link, Redirect, RouteComponentProps } from '@reach/router'
 
 // Routes and store
-import { ACCOUNT_WALLET, HOME, LOGIN } from '../routes'
+import { ACCOUNT_WALLET, LOGIN } from '../routes'
 import { useStore } from '../store'
 
 // Components
