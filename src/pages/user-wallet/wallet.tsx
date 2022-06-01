@@ -135,7 +135,7 @@ export const AccountWallet = (_: RouteComponentProps) => {
 	const ViewComponent = VIEWS[view]
 	const { data: balance } = useBalance()
 
-	if (!profile) {
+	if (!profile?.address) {
 		return <Redirect to={LOGIN} noThrow />
 	}
 

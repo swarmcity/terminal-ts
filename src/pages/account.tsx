@@ -1,14 +1,18 @@
 import avatarDefault from '../assets/imgs/avatar.svg?url'
 import exit from '../assets/imgs/exit.svg?url'
-import { HOME } from '../routes'
+import { HOME, LOGIN } from '../routes'
 import { useStore } from '../store'
-import { RouteComponentProps } from '@reach/router'
+import { Redirect, RouteComponentProps } from '@reach/router'
 import { CreateAvatar } from '../components/modals/create-avatar'
 
 type Props = RouteComponentProps
 
 export const Account = (_: Props) => {
 	const [profile] = useStore.profile()
+
+	if (!profile?.address) {
+		return <Redirect to={LOGIN} noThrow />
+	}
 
 	return (
 		<div class="bg-gray-lt account-wallet">

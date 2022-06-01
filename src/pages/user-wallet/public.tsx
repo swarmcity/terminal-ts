@@ -22,8 +22,8 @@ export const AccountPublicWallet = (_: AccountPublicWalletProps) => {
 	const [privateKey, setPrivateKey] = useState<string>()
 	const [profile] = useStore.profile()
 
-	if (!profile || !profile.address) {
-		return <Redirect path={LOGIN} noThrow />
+	if (!profile?.address) {
+		return <Redirect to={LOGIN} noThrow />
 	}
 
 	return (
