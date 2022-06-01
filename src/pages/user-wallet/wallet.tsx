@@ -18,9 +18,6 @@ import {
 	ACCOUNT_WALLET,
 } from '../../routes'
 
-// Assets
-import sendButton from '../../assets/imgs/caretNext.svg'
-
 // Types
 import type { RouteComponentProps } from '@reach/router'
 import { ButtonRoundArrow } from '../../components/ButtonRoundArrow'
@@ -99,9 +96,11 @@ const Send = (_: RouteComponentProps) => {
 
 				<div class="btns btn-icons">
 					<ButtonClose to={ACCOUNT_WALLET} className="close" />
-					<ButtonRoundArrow type="submit" className="btn-icon" onClick={submit}>
-						<img src={sendButton} />
-					</ButtonRoundArrow>
+					<ButtonRoundArrow
+						type="submit"
+						className="btn-icon"
+						onClick={submit}
+					/>
 				</div>
 			</form>
 		</div>
