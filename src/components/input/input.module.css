@@ -31,9 +31,9 @@
 	transition: font-size 0.5s, font-weight 0.5s, color 0.5s, bottom 0.5s;
 }
 
-.input-group input:focus+label,
-.input-group input:valid+label ,
-.input-group input:invalid+label{
+.input-group input:focus + label,
+.input-group input:valid + label,
+.input-group input:invalid + label {
 	bottom: 46px;
 	color: #24b1ff;
 	font-size: 10px;
