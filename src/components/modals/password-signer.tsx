@@ -4,7 +4,7 @@ import { forwardRef } from 'preact/compat'
 import { useImperativeHandle, useState } from 'preact/hooks'
 
 // Hooks
-import { useDeferredPromise } from '../../hooks/useDeferredPromise'
+import { useDeferredPromise } from '../../hooks/use-deferred-promise'
 
 // Components
 import { PasswordModal } from './password/password'

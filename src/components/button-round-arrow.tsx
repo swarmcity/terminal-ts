@@ -2,7 +2,7 @@
 import caretNext from '../assets/imgs/caretNext.svg?url'
 
 // Components
-import { FlexLink, FlexLinkProps } from './FlexLink'
+import { FlexLink, FlexLinkProps } from './flex-link'
 
 const directions = {
 	right: 0,

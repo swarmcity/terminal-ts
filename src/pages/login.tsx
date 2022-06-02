@@ -1,5 +1,5 @@
 import { Link, RouteComponentProps } from '@reach/router'
-import { ButtonClose } from '../components/ButtonClose'
+import { ButtonClose } from '../components/button-close'
 import { ACCOUNT_RESTORE, CREATE_ACCOUNT, HOME } from '../routes'
 
 type LoginProps = RouteComponentProps
