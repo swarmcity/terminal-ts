@@ -1,6 +1,6 @@
 import { useState } from 'preact/hooks'
 import { Link, navigate, Redirect, Router } from '@reach/router'
-import { useBalance, useSendTransaction } from 'wagmi'
+import { useAccount, useBalance, useNetwork, useSendTransaction } from 'wagmi'
 import { getAddress } from '@ethersproject/address'
 import { parseEther } from '@ethersproject/units'
 
@@ -109,7 +109,12 @@ const Send = (_: RouteComponentProps) => {
 
 export const AccountWallet = (_: RouteComponentProps) => {
 	const [profile] = useStore.profile()
-	const { data: balance } = useBalance()
+
+	const { activeChain } = useNetwork()
+	const symbol = activeChain?.nativeCurrency?.symbol
+
+	const { data: account } = useAccount()
+	const { data: balance } = useBalance({ addressOrName: account?.address })
 
 	if (!profile?.address) {
 		return <Redirect to={LOGIN} noThrow />
@@ -130,7 +135,7 @@ export const AccountWallet = (_: RouteComponentProps) => {
 							</>
 						) : (
 							<>
-								0.0 xDAI <span class="usd"> ≈ 0.0 USD</span>
+								0.0 {symbol} <span class="usd"> ≈ 0.0 USD</span>
 							</>
 						)}
 					</div>
