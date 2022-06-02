@@ -5,7 +5,7 @@ import { getAddress } from '@ethersproject/address'
 import { parseEther } from '@ethersproject/units'
 
 // Components
-import { ButtonClose } from '../../components/ButtonClose'
+import { ButtonClose } from '../../components/button-close'
 import { Input } from '../../components/input/input'
 
 // Store and routes
@@ -20,7 +20,7 @@ import {
 
 // Types
 import type { RouteComponentProps } from '@reach/router'
-import { ButtonRoundArrow } from '../../components/ButtonRoundArrow'
+import { ButtonRoundArrow } from '../../components/button-round-arrow'
 
 const Menu = (_: RouteComponentProps) => (
 	<div class="flex-space">

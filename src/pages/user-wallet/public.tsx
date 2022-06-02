@@ -3,7 +3,7 @@ import { Redirect } from '@reach/router'
 import { QRCodeSVG } from 'qrcode.react'
 
 // Components
-import { ButtonClose } from '../../components/ButtonClose'
+import { ButtonClose } from '../../components/button-close'
 import { PasswordModal } from '../../components/modals/password/password'
 import { CopyLink } from '../../components/copy-link/copy-link'
 

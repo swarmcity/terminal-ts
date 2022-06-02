@@ -4,7 +4,7 @@ import { ACCOUNT_CREATED } from '../../routes'
 import { navigate, RouteComponentProps } from '@reach/router'
 import { Wallet } from 'ethers'
 import { UserCreateStop } from '../../components/modals/user-create-stop'
-import { ButtonRoundArrow } from '../../components/ButtonRoundArrow'
+import { ButtonRoundArrow } from '../../components/button-round-arrow'
 import { useStore } from '../../store'
 import { Input } from '../../components/input/input'
 
