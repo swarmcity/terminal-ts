@@ -83,7 +83,7 @@ export const Backup = (_: Props) => {
 						<h1>Save the file in a safe location</h1>
 						<p>
 							A download should begin. Save the file somehwere safe. With this
-							file you will alwasy be able to get access to the funds on your
+							file you will always be able to get access to the funds on your
 							wallet.
 						</p>
 						<p>
