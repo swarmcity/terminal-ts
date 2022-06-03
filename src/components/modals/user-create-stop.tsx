@@ -33,7 +33,7 @@ export const UserCreateStop = () => {
 			<div class="container">
 				<main class="flex-space">
 					<header>
-						<h1>Stop creating user account?</h1>
+						<h1 style={{ color: 'white' }}>Stop creating user account?</h1>
 					</header>
 					<div class="btns">
 						<ButtonClose onClick={() => setShown(false)} />
