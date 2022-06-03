@@ -24,7 +24,10 @@ export const Account = (_: Props) => {
 	const symbol = activeChain?.nativeCurrency?.symbol
 
 	const { data: account } = useAccount()
-	const { data: balance } = useBalance({ addressOrName: account?.address })
+	const { data: balance } = useBalance({
+		addressOrName: account?.address,
+		watch: true,
+	})
 
 	const formattedBalance = balance
 		? `${balance.formatted} ${balance.symbol}`

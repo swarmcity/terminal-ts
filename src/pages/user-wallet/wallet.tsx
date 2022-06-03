@@ -114,7 +114,10 @@ export const AccountWallet = (_: RouteComponentProps) => {
 	const symbol = activeChain?.nativeCurrency?.symbol
 
 	const { data: account } = useAccount()
-	const { data: balance } = useBalance({ addressOrName: account?.address })
+	const { data: balance } = useBalance({
+		addressOrName: account?.address,
+		watch: true,
+	})
 
 	if (!profile?.address) {
 		return <Redirect to={LOGIN} noThrow />
