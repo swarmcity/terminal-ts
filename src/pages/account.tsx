@@ -5,9 +5,6 @@ import { Link, Redirect } from '@reach/router'
 import { ACCOUNT_WALLET, LOGIN } from '../routes'
 import { useStore } from '../store'
 
-// Components
-import { CreateAvatar } from '../components/modals/create-avatar'
-
 // Lib
 import { formatBalance } from '../lib/tools'
 
