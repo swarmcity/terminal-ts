@@ -147,8 +147,6 @@ const Send = (_: RouteComponentProps) => {
 					Receiver's address
 				</Input>
 
-				{/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-				{isError && (error as any).reason}
 				{!isValid && amount && address && 'Form invalid'}
 
 				<div class="btns btn-icons">
