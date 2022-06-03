@@ -2,8 +2,10 @@ import cn from 'classnames'
 
 // Assets
 import caretNext from '../assets/imgs/caretNext.svg?url'
+import caretNextGreen from '../assets/imgs/caretNextGreen.svg?url'
 import caretNextNegative from '../assets/imgs/caretNextNegative.svg?url'
 import checkMarkBlue from '../assets/imgs/checkMarkBlue.svg?url'
+import checkMarkRed from '../assets/imgs/checkMarkRed.svg?url'
 
 // Components
 import { FlexLink, FlexLinkProps } from './FlexLink'
@@ -19,6 +21,8 @@ const VARIANTS = {
 	default: caretNext,
 	negative: caretNextNegative,
 	check: checkMarkBlue,
+	checkRed: checkMarkRed,
+	green: caretNextGreen,
 }
 
 export interface ButtonRoundArrowProps<TState> extends FlexLinkProps<TState> {

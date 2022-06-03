@@ -13,24 +13,38 @@ import type { ComponentChildren } from 'preact'
 import classes from './confirm-modal.module.css'
 
 export type ConfirmModalProps<CancelState, ConfirmState> = {
-	cancel: ButtonCloseProps<CancelState>
-	confirm: ButtonRoundArrowProps<ConfirmState>
+	cancel?: ButtonCloseProps<CancelState>
+	confirm?: ButtonRoundArrowProps<ConfirmState>
+	color?:
+		| 'primary'
+		| 'secondary'
+		| 'success'
+		| 'info'
+		| 'warning'
+		| 'danger'
+		| 'light'
+		| 'dark'
+		| 'black'
+		| 'white'
 	children: ComponentChildren
 }
 
 export const ConfirmModal = <CancelState, ConfirmState>({
 	cancel,
 	confirm,
+	color,
 	children,
 }: ConfirmModalProps<CancelState, ConfirmState>) => {
 	return (
-		<div class={cn(classes.confirmModal, 'bg-info')}>
+		<div class={cn(classes.confirmModal, color ? `bg-${color}` : 'bg-info')}>
 			<div class="container">
 				<main class="flex-space">
 					<header>{children}</header>
 					<div class="btns btn-icons">
-						<ButtonClose className="close" {...cancel} />
-						<ButtonRoundArrow type="submit" variant="negative" {...confirm} />
+						{cancel && <ButtonClose className="close" {...cancel} />}
+						{confirm && (
+							<ButtonRoundArrow type="submit" variant="negative" {...confirm} />
+						)}
 					</div>
 				</main>
 			</div>

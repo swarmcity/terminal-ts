@@ -72,15 +72,39 @@ const Send = (_: RouteComponentProps) => {
 	const { activeChain } = useNetwork()
 	const symbol = activeChain?.nativeCurrency?.symbol
 
-	const { isLoading, isError, error, sendTransaction } = useSendTransaction({
-		request: { to, value },
-		onSuccess: () => navigate(ACCOUNT_WALLET),
-	})
+	const { isLoading, isError, isSuccess, error, sendTransaction, reset } =
+		useSendTransaction({ request: { to, value } })
 
 	const submit = () => setShowConfirm(isValid)
 
 	if (isLoading) {
 		return <FullscreenLoading />
+	}
+
+	if (isError) {
+		return (
+			<ConfirmModal
+				confirm={{ onClick: () => reset(), variant: 'checkRed' }}
+				color="danger"
+			>
+				<h1 style={{ color: '#fafafa', marginBottom: '25px' }}>
+					Something went wrong, please try again later.
+				</h1>
+				<p>{error}</p>
+			</ConfirmModal>
+		)
+	}
+
+	if (isSuccess) {
+		return (
+			<ConfirmModal
+				confirm={{ onClick: () => navigate(ACCOUNT_WALLET), variant: 'green' }}
+				color="success"
+			>
+				<h1 style={{ color: '#fafafa' }}>{symbol} has been sent.</h1>
+				<p>{error}</p>
+			</ConfirmModal>
+		)
 	}
 
 	if (showConfirm) {
