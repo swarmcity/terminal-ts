@@ -9,6 +9,7 @@ import { ButtonClose } from '../../components/ButtonClose'
 import { Input } from '../../components/input/input'
 import { ButtonRoundArrow } from '../../components/ButtonRoundArrow'
 import { ConfirmModal } from '../../components/modals/confirm-modal/confirm-modal'
+import { FullscreenLoading } from '../../components/modals/fullscreen-loading/fullscreen-loading'
 
 // Lib
 import { formatAddressShort, formatBalance } from '../../lib/tools'
@@ -78,6 +79,10 @@ const Send = (_: RouteComponentProps) => {
 
 	const submit = () => setShowConfirm(isValid)
 
+	if (isLoading) {
+		return <FullscreenLoading />
+	}
+
 	if (showConfirm) {
 		return (
 			<ConfirmModal
@@ -120,7 +125,6 @@ const Send = (_: RouteComponentProps) => {
 
 				{/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
 				{isError && (error as any).reason}
-				{isLoading && 'Loading...'}
 				{!isValid && amount && address && 'Form invalid'}
 
 				<div class="btns btn-icons">
