@@ -8,9 +8,10 @@ import { parseEther } from '@ethersproject/units'
 import { ButtonClose } from '../../components/ButtonClose'
 import { Input } from '../../components/input/input'
 import { ButtonRoundArrow } from '../../components/ButtonRoundArrow'
+import { ConfirmModal } from '../../components/modals/confirm-modal/confirm-modal'
 
 // Lib
-import { formatBalance } from '../../lib/tools'
+import { formatAddressShort, formatBalance } from '../../lib/tools'
 
 // Store and routes
 import { useStore } from '../../store'
@@ -62,19 +63,37 @@ const formatRequest = ({
 }
 
 const Send = (_: RouteComponentProps) => {
+	const [showConfirm, setShowConfirm] = useState(false)
 	const [amount, setAmount] = useState('0')
 	const [address, setAddress] = useState('')
 	const { to, value, isValid } = formatRequest({ amount, address })
+
+	const { activeChain } = useNetwork()
+	const symbol = activeChain?.nativeCurrency?.symbol
 
 	const { isLoading, isError, error, sendTransaction } = useSendTransaction({
 		request: { to, value },
 		onSuccess: () => navigate(ACCOUNT_WALLET),
 	})
 
-	const submit = () => {
-		if (isValid) {
-			sendTransaction()
-		}
+	const submit = () => setShowConfirm(isValid)
+
+	if (showConfirm) {
+		return (
+			<ConfirmModal
+				cancel={{ onClick: () => setShowConfirm(false) }}
+				confirm={{ onClick: () => sendTransaction(), variant: 'check' }}
+			>
+				<h1 style={{ color: '#fafafa' }}>
+					Send{' '}
+					<span class="text-warning">
+						{amount} {symbol}
+					</span>{' '}
+					to {formatAddressShort(address)}?
+				</h1>
+				<p>This cannot be undone.</p>
+			</ConfirmModal>
+		)
 	}
 
 	return (
@@ -84,6 +103,7 @@ const Send = (_: RouteComponentProps) => {
 					id="amt-send"
 					type="number"
 					min={0}
+					value={amount}
 					onChange={(event) => setAmount(event.currentTarget.value)}
 				>
 					Amount to send
@@ -92,6 +112,7 @@ const Send = (_: RouteComponentProps) => {
 					id="rec-address"
 					type="text"
 					min={0}
+					value={address}
 					onChange={(event) => setAddress(event.currentTarget.value)}
 				>
 					Receiver's address

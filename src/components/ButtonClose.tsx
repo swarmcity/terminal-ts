@@ -12,7 +12,7 @@ const VARIANTS = {
 	dark: close,
 }
 
-interface ButtonCloseProps<TState> extends FlexLinkProps<TState> {
+export interface ButtonCloseProps<TState> extends FlexLinkProps<TState> {
 	variant?: keyof typeof VARIANTS
 }
 

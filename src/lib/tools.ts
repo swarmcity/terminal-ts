@@ -15,3 +15,7 @@ export const formatBalance = (balance: FetchBalanceResult) => {
 	const rounded = Math.round(parseFloat(toRound))
 	return `${whole}.${rounded.toString().padStart(2, '0')} ${balance.symbol}`
 }
+
+export const formatAddressShort = (address: string) => {
+	return `${address.substring(0, 5)}..${address.substring(39, 42)}`
+}
