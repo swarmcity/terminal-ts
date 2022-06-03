@@ -46,11 +46,7 @@ export const Account = (_: Props) => {
 			<div class="container">
 				<main class="flex-space">
 					<figure class="avatar avatar-sm">
-						<CreateAvatar>
-							<a href="#">
-								<img src={profile?.avatar || avatarDefault} alt="user avatar" />
-							</a>
-						</CreateAvatar>
+						<img src={profile?.avatar || avatarDefault} alt="user avatar" />
 						<figcaption>
 							<a href="#" class="username">
 								{profile?.username}
