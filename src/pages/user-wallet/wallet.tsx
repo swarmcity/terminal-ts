@@ -25,16 +25,21 @@ import {
 // Types
 import type { RouteComponentProps } from '@reach/router'
 
-const Menu = (_: RouteComponentProps) => (
-	<div class="flex-space">
-		<Link to={ACCOUNT_WALLET_SEND} className="btn btn-info">
-			send DAI
-		</Link>
-		<Link to={ACCOUNT_PUBLIC_WALLET} className="btn btn-info">
-			receive
-		</Link>
-	</div>
-)
+const Menu = (_: RouteComponentProps) => {
+	const { activeChain } = useNetwork()
+	const symbol = activeChain?.nativeCurrency?.symbol
+
+	return (
+		<div class="flex-space">
+			<Link to={ACCOUNT_WALLET_SEND} className="btn btn-info">
+				send {symbol}
+			</Link>
+			<Link to={ACCOUNT_PUBLIC_WALLET} className="btn btn-info">
+				receive
+			</Link>
+		</div>
+	)
+}
 
 const formatRequest = ({
 	address,
