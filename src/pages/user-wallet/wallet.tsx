@@ -7,6 +7,10 @@ import { parseEther } from '@ethersproject/units'
 // Components
 import { ButtonClose } from '../../components/ButtonClose'
 import { Input } from '../../components/input/input'
+import { ButtonRoundArrow } from '../../components/ButtonRoundArrow'
+
+// Lib
+import { formatBalance } from '../../lib/tools'
 
 // Store and routes
 import { useStore } from '../../store'
@@ -20,7 +24,6 @@ import {
 
 // Types
 import type { RouteComponentProps } from '@reach/router'
-import { ButtonRoundArrow } from '../../components/ButtonRoundArrow'
 
 const Menu = (_: RouteComponentProps) => (
 	<div class="flex-space">
@@ -133,12 +136,12 @@ export const AccountWallet = (_: RouteComponentProps) => {
 					<div class="wallet-balance">
 						{balance ? (
 							<>
-								{balance.formatted} {balance.symbol}{' '}
+								{formatBalance(balance)}{' '}
 								<span class="usd"> ≈ {balance.formatted} USD</span>
 							</>
 						) : (
 							<>
-								0.0 {symbol} <span class="usd"> ≈ 0.0 USD</span>
+								0.00 {symbol} <span class="usd"> ≈ 0.0 USD</span>
 							</>
 						)}
 					</div>

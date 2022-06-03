@@ -8,6 +8,9 @@ import { useStore } from '../store'
 // Components
 import { CreateAvatar } from '../components/modals/create-avatar'
 
+// Lib
+import { formatBalance } from '../lib/tools'
+
 // Assets
 import avatarDefault from '../assets/imgs/avatar.svg?url'
 import exit from '../assets/imgs/exit.svg?url'
@@ -28,10 +31,6 @@ export const Account = (_: Props) => {
 		addressOrName: account?.address,
 		watch: true,
 	})
-
-	const formattedBalance = balance
-		? `${balance.formatted} ${balance.symbol}`
-		: `0 ${symbol}`
 
 	if (!profile?.address) {
 		return <Redirect to={LOGIN} noThrow />
@@ -58,7 +57,7 @@ export const Account = (_: Props) => {
 							</a>
 							<div>
 								<Link to={ACCOUNT_WALLET} className="wallet-balance">
-									{formattedBalance}
+									{balance ? formatBalance(balance) : `0.00 ${symbol}`}
 								</Link>
 							</div>
 						</figcaption>
