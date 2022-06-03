@@ -33,7 +33,10 @@ const PasswordSignerInner = (
 	return (
 		<PasswordModal
 			show={showPassword}
-			onClose={() => setShowPassword(false)}
+			onClose={() => {
+				setShowPassword(false)
+				deferRef?.reject(new Error('transaction canceled'))
+			}}
 			onSuccess={(wallet) => {
 				deferRef?.resolve(wallet)
 			}}
