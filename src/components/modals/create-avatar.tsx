@@ -96,7 +96,14 @@ export const CreateAvatar = ({ children }: Props) => {
 					</div>
 				</main>
 				<div class="bottomlink">
-					<label class="link">
+					<label
+						class="link"
+						style={{
+							color: '#229FFF',
+							textDecoration: '2px underline dotted #979797',
+							fontWeight: 'bold',
+						}}
+					>
 						<input
 							type="file"
 							onChange={onFileChange}
