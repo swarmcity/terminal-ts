@@ -129,7 +129,7 @@ export const AccountWallet = (_: RouteComponentProps) => {
 	return (
 		<div class="bg-gray-lt user-wallet">
 			<div class="close">
-				<ButtonClose href={ACCOUNT} variant="dark" />
+				<ButtonClose to={ACCOUNT} variant="dark" />
 			</div>
 			<div class="container">
 				<div class="flex-space">
