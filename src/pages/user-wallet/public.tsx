@@ -38,7 +38,7 @@ export const AccountPublicWallet = (_: AccountPublicWalletProps) => {
 			/>
 
 			<div class="close">
-				<ButtonClose href={ACCOUNT_WALLET} variant="dark" />
+				<ButtonClose to={ACCOUNT_WALLET} variant="dark" />
 			</div>
 
 			<main class="flex-space">

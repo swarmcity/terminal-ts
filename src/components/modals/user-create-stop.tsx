@@ -7,11 +7,13 @@ import { ButtonClose } from '../ButtonClose'
 // Assets
 import checkMarkRed from '../../assets/imgs/checkMarkRed.svg?url'
 
-// Routes
+// Routes and store
 import { LOGIN } from '../../routes'
+import { useStore } from '../../store'
 
 export const UserCreateStop = () => {
 	const [shown, setShown] = useState<boolean>()
+	const [, setProfile] = useStore.profile()
 
 	if (!shown) {
 		return <ButtonClose onClick={() => setShown(true)} />
@@ -33,11 +35,11 @@ export const UserCreateStop = () => {
 			<div class="container">
 				<main class="flex-space">
 					<header>
-						<h1>Stop creating user account?</h1>
+						<h1 style={{ color: 'white' }}>Stop creating user account?</h1>
 					</header>
 					<div class="btns">
 						<ButtonClose onClick={() => setShown(false)} />
-						<Link className="btn-icon" to={LOGIN}>
+						<Link className="btn-icon" to={LOGIN} onClick={() => setProfile()}>
 							<img src={checkMarkRed} />
 						</Link>
 					</div>

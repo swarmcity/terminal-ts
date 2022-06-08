@@ -5,8 +5,8 @@ import { Link, Redirect } from '@reach/router'
 import { ACCOUNT_WALLET, LOGIN } from '../routes'
 import { useStore } from '../store'
 
-// Components
-import { CreateAvatar } from '../components/modals/create-avatar'
+// Lib
+import { formatBalance } from '../lib/tools'
 
 // Assets
 import avatarDefault from '../assets/imgs/avatar.svg?url'
@@ -24,11 +24,10 @@ export const Account = (_: Props) => {
 	const symbol = activeChain?.nativeCurrency?.symbol
 
 	const { data: account } = useAccount()
-	const { data: balance } = useBalance({ addressOrName: account?.address })
-
-	const formattedBalance = balance
-		? `${balance.formatted} ${balance.symbol}`
-		: `0 ${symbol}`
+	const { data: balance } = useBalance({
+		addressOrName: account?.address,
+		watch: true,
+	})
 
 	if (!profile?.address) {
 		return <Redirect to={LOGIN} noThrow />
@@ -44,18 +43,14 @@ export const Account = (_: Props) => {
 			<div class="container">
 				<main class="flex-space">
 					<figure class="avatar avatar-sm">
-						<CreateAvatar>
-							<a href="#">
-								<img src={profile?.avatar || avatarDefault} alt="user avatar" />
-							</a>
-						</CreateAvatar>
+						<img src={profile?.avatar || avatarDefault} alt="user avatar" />
 						<figcaption>
 							<a href="#" class="username">
 								{profile?.username}
 							</a>
 							<div>
 								<Link to={ACCOUNT_WALLET} className="wallet-balance">
-									{formattedBalance}
+									{balance ? formatBalance(balance) : `0.00 ${symbol}`}
 								</Link>
 							</div>
 						</figcaption>
